@@ -30,4 +30,20 @@ public final class Hai {
 		return buf.toString();
 	}
 
+	public static boolean isChunchan(int hai) {
+		int kind = hai / 9;
+		int number = hai % 9 + 1;
+		return kind <= 2 && number != 1 && number != 9;
+	}
+	
+	public static boolean isChunchanStart(int hai) {
+		int kind = hai / 9;
+		int number = hai % 9 + 1;
+		return kind <= 2 && number != 1 && number != 7;
+	}
+
+	public static boolean isYaochu(int hai) {
+		return !isChunchan(hai);
+	}
+
 }

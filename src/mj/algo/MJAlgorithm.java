@@ -2,6 +2,7 @@ package mj.algo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -11,12 +12,72 @@ public final class MJAlgorithm {
 
 	public static void main(String[] args) {
 		List<Integer> tehai;
-		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
-		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
+		tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
+		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
+		// List<Hora> result = enumHora(tehai);
+		// for (Hora hora : result) {
+		// System.out.println(hora);
+		// }
+		maxPoint(tehai, 4, true);
+	}
+
+	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
+		if (tehai.indexOf(agari) == -1)
+			throw new MJAlgorithmException("Invalid agari hai");
+
 		List<Hora> result = enumHora(tehai);
-		for (Hora hora : result) {
-			System.out.println(hora);
+		if (result.isEmpty()) {
+			System.out.println("Not hora");
+			return;
 		}
+
+		boolean naki = true;
+		for (Mentsu m : result.get(0).mentsu) {
+			naki |= m.naki;
+		}
+
+		int hanmax = 0;
+		int humax = 0;
+		for (Hora hora : result) {
+			int han = 0;
+			int hu = 0;
+			// enumYaku();
+			System.out.println(hora);
+			System.out.println(enumYaku(hora));
+			// try all forms (ryanmen, kanchan, ...)
+			// and add pinfu
+		}
+	}
+
+	// except for PINFU
+	private static EnumSet<Yaku> enumYaku(Hora hora) {
+		EnumSet<Yaku> set = EnumSet.noneOf(Yaku.class);
+
+		// TANYAO
+		if (Hai.isChunchan(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				switch (m.type) {
+				case KOTSU:
+				case KANTSU:
+					if (!Hai.isChunchan(m.hai)) {
+						ok = false;
+					}
+					break;
+				case SHUNTSU:
+					if (!Hai.isChunchanStart(m.hai)) {
+						ok = false;
+					}
+				default:
+					assert false;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.TANYAO);
+			}
+		}
+
+		return set;
 	}
 
 	public static List<Hora> enumHora(List<Integer> tehai) {
