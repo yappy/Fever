@@ -8,9 +8,8 @@ public final class Hai {
 
 	public static String toString(int hai) {
 		StringBuilder buf = new StringBuilder(2);
-		hai /= 4;
 		int kind = hai / 9;
-		int number = hai % 9;
+		int number = hai % 9 + 1;
 		buf.append(number);
 		switch (kind) {
 		case 0:

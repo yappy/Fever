@@ -10,19 +10,22 @@ public class Mentsu {
 	}
 
 	public Type type;
-	public int number;
-	public int kind;
+	public int hai;
 	public boolean naki;
 
-	public Mentsu(Type type, int number, int kind, boolean naki) {
+	public Mentsu(Type type, int hai, boolean naki) {
 		this.type = type;
-		this.number = number;
-		this.kind = kind;
+		this.hai = hai;
 		this.naki = naki;
 	}
 
 	public Mentsu copy() {
-		return new Mentsu(type, number, kind, naki);
+		return new Mentsu(type, hai, naki);
+	}
+
+	@Override
+	public String toString() {
+		return "(" + type + ":" + Hai.toString(hai) + ")";
 	}
 
 }

@@ -1,12 +1,23 @@
 package mj.algo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author yappy
  */
 public final class MJAlgorithm {
+
+	public static void main(String[] args) {
+		List<Integer> tehai;
+		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
+		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
+		List<Hora> result = enumHora(tehai);
+		for (Hora hora : result) {
+			System.out.println(hora);
+		}
+	}
 
 	public static List<Hora> enumHora(List<Integer> tehai) {
 		if (tehai.size() % 3 != 2 || tehai.size() > 14)
@@ -26,7 +37,7 @@ public final class MJAlgorithm {
 			if (table[i] >= 2) {
 				table[i] -= 2;
 				Hora work = new Hora();
-				work.atama = new Mentsu(Mentsu.Type.ATAMA, i % 9, i / 9, false);
+				work.atama = new Mentsu(Mentsu.Type.ATAMA, i, false);
 				tryMentsu(result, work, table, count - 2);
 				table[i] += 2;
 			}
@@ -45,12 +56,26 @@ public final class MJAlgorithm {
 				// kotu
 				if (table[i] >= 3) {
 					table[i] -= 3;
-					work.addMentsu(new Mentsu(Mentsu.Type.SHUNTSU, i % 9,
-							i / 9, false));
+					work.pushMentsu(new Mentsu(Mentsu.Type.KOTSU, i, false));
 					tryMentsu(result, work, table, count - 3);
+					work.popMentsu();
 					table[i] += 3;
 				}
 				// shuntsu
+				if (i / 9 <= 2 && i % 9 <= 6) {
+					if (table[i] >= 1 && table[i + 1] >= 1 && table[i + 2] >= 1) {
+						table[i]--;
+						table[i + 1]--;
+						table[i + 2]--;
+						work.pushMentsu(new Mentsu(Mentsu.Type.SHUNTSU, i,
+								false));
+						tryMentsu(result, work, table, count - 3);
+						work.popMentsu();
+						table[i]++;
+						table[i + 1]++;
+						table[i + 2]++;
+					}
+				}
 				break;
 			}
 		}
