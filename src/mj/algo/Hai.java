@@ -6,7 +6,7 @@ package mj.algo;
  */
 public final class Hai {
 
-	public static final String toString(int hai) {
+	public static String toString(int hai) {
 		StringBuilder buf = new StringBuilder(2);
 		hai /= 4;
 		int kind = hai / 9;
@@ -25,6 +25,8 @@ public final class Hai {
 		case 3:
 			buf.append('z');
 			break;
+		default:
+			buf.append('?');
 		}
 		return buf.toString();
 	}
