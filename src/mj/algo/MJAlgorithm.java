@@ -31,11 +31,6 @@ public final class MJAlgorithm {
 			return;
 		}
 
-		boolean naki = true;
-		for (Mentsu m : result.get(0).mentsu) {
-			naki |= m.naki;
-		}
-
 		int hanmax = 0;
 		int humax = 0;
 		for (Hora hora : result) {
@@ -43,15 +38,20 @@ public final class MJAlgorithm {
 			int hu = 0;
 			// enumYaku();
 			System.out.println(hora);
-			System.out.println(enumYaku(hora));
+			System.out.println(enumYaku(hora, tsumo));
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
 		}
 	}
 
 	// except for PINFU
-	private static EnumSet<Yaku> enumYaku(Hora hora) {
+	private static EnumSet<Yaku> enumYaku(Hora hora, boolean tsumo) {
 		EnumSet<Yaku> set = EnumSet.noneOf(Yaku.class);
+
+		boolean naki = false;
+		for (Mentsu m : hora.mentsu) {
+			naki |= m.naki;
+		}
 
 		// TANYAO
 		if (Hai.isChunchan(hora.atama.hai)) {
@@ -76,6 +76,24 @@ public final class MJAlgorithm {
 				set.add(Yaku.TANYAO);
 			}
 		}
+		// IPEKO
+		if (!naki) {
+			boolean ok = false;
+			for (int i = 0; i < 3; i++) {
+				if (hora.mentsu[i].type == Mentsu.Type.SHUNTSU
+						&& hora.mentsu[i + 1].type == Mentsu.Type.SHUNTSU) {
+					if (hora.mentsu[i].hai == hora.mentsu[i + 1].hai) {
+						ok = true;
+						break;
+					}
+				}
+			}
+			if (ok) {
+				set.add(Yaku.IPEKO);
+			}
+		}
+		// TODO: YAKUHAI
+		//
 
 		return set;
 	}
