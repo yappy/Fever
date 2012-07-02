@@ -33,6 +33,21 @@ public class Hora {
 		return hora;
 	}
 
+	/**
+	 * Count each shuntsu.<br>
+	 * 
+	 * @return int[3][7]
+	 */
+	public int[][] createShuntsuTable() {
+		int[][] result = new int[3][7];
+		for (int i = 0; i < 4; i++) {
+			if (mentsu[i].type == Mentsu.Type.SHUNTSU) {
+				result[mentsu[i].hai / 9][mentsu[i].hai % 9]++;
+			}
+		}
+		return result;
+	}
+
 	@Override
 	public String toString() {
 		return "" + atama + mentsu[0] + mentsu[1] + mentsu[2] + mentsu[3];
