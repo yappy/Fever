@@ -22,7 +22,10 @@ public final class MJAlgorithm {
 		// for (Hora hora : result) {
 		// System.out.println(hora);
 		// }
+		long start = System.nanoTime();
 		maxPoint(tehai, 0, true);
+		long end = System.nanoTime();
+		System.out.printf("%dus%n", (end - start) / 1000);
 	}
 
 	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
