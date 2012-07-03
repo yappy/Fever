@@ -52,6 +52,7 @@ public final class MJAlgorithm {
 		for (Mentsu m : hora.mentsu) {
 			naki |= m.naki;
 		}
+		int[][] shuntsuTable = hora.createShuntsuTable();
 
 		// TANYAO
 		if (Hai.isChunchan(hora.atama.hai)) {
@@ -79,10 +80,9 @@ public final class MJAlgorithm {
 		// IPEKO
 		if (!naki) {
 			boolean ok = false;
-			for (int i = 0; i < 3; i++) {
-				if (hora.mentsu[i].type == Mentsu.Type.SHUNTSU
-						&& hora.mentsu[i + 1].type == Mentsu.Type.SHUNTSU) {
-					if (hora.mentsu[i].hai == hora.mentsu[i + 1].hai) {
+			for (int k = 0; k < 3; k++) {
+				for (int n = 0; n < 7; n++) {
+					if (shuntsuTable[k][n] >= 2) {
 						ok = true;
 						break;
 					}
