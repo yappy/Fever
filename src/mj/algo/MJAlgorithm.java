@@ -40,14 +40,24 @@ public final class MJAlgorithm {
 			int hu = 0;
 			// enumYaku();
 			System.out.println(hora);
-			System.out.println(enumYaku(hora, tsumo));
+			System.out.println(enumYaku(hora, agari, tsumo));
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
 		}
 	}
 
-	// except for PINFU
-	private static EnumSet<Yaku> enumYaku(Hora hora, boolean tsumo) {
+	/**
+	 * Enumerate yaku.
+	 * 
+	 * @param hora
+	 *            Hora form.
+	 * @param agari
+	 *            Agari hai.
+	 * @param tsumo
+	 *            tsumo or ron.
+	 * @return Yaku set(except for PINFU).
+	 */
+	private static EnumSet<Yaku> enumYaku(Hora hora, int agari, boolean tsumo) {
 		EnumSet<Yaku> set = EnumSet.noneOf(Yaku.class);
 
 		boolean naki = false;
@@ -152,6 +162,20 @@ public final class MJAlgorithm {
 			}
 			if(ok)
 				set.add(Yaku.TOITOI);
+		}
+
+		// SANANKO
+		{
+			int count = 0;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type == Mentsu.Type.KOTSU || m.type == Mentsu.Type.KANTSU) {
+					if (!m.naki && (m.hai != agari || tsumo)) {
+						count++;
+					}
+				}
+			}
+			if (count >= 3)
+				set.add(Yaku.SANANKO);
 		}
 
 		return set;
