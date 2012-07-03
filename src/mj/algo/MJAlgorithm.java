@@ -232,6 +232,29 @@ public final class MJAlgorithm {
 				set.add(Yaku.RYANPEKO);
 			}
 		}
+		// HONITSU
+		{
+			boolean ok = true;
+			int color = -1;
+			if (hora.atama.hai / 9 != 3) {
+				color = hora.atama.hai / 9;
+			}
+			for (int i = 0; i < 4; i++) {
+				if (hora.mentsu[i].hai / 9 != 3) {
+					if (color == -1) {
+						color = hora.mentsu[i].hai / 9;
+					} else {
+						if (hora.mentsu[i].hai / 9 != color) {
+							ok = false;
+							break;
+						}
+					}
+				}
+			}
+			if (ok) {
+				set.add(Yaku.HONITSU);
+			}
+		}
 
 		return set;
 	}
