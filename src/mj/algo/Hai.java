@@ -45,5 +45,9 @@ public final class Hai {
 	public static boolean isYaochu(int hai) {
 		return !isChunchan(hai);
 	}
+	
+	public static boolean isYaochuStart(int hai) {
+		return !isChunchanStart(hai);
+	}
 
 }

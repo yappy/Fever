@@ -12,13 +12,14 @@ public final class MJAlgorithm {
 
 	public static void main(String[] args) {
 		List<Integer> tehai;
-		tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
+		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
+		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
 		// List<Hora> result = enumHora(tehai);
 		// for (Hora hora : result) {
 		// System.out.println(hora);
 		// }
-		maxPoint(tehai, 4, true);
+		maxPoint(tehai, 0, true);
 	}
 
 	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
@@ -61,21 +62,18 @@ public final class MJAlgorithm {
 				switch (m.type) {
 				case KOTSU:
 				case KANTSU:
-					if (!Hai.isChunchan(m.hai)) {
+					if (!Hai.isChunchan(m.hai))
 						ok = false;
-					}
 					break;
 				case SHUNTSU:
-					if (!Hai.isChunchanStart(m.hai)) {
+					if (!Hai.isChunchanStart(m.hai))
 						ok = false;
-					}
 				default:
 					assert false;
 				}
 			}
-			if (ok) {
+			if (ok)
 				set.add(Yaku.TANYAO);
-			}
 		}
 		// IPEKO
 		if (!naki) {
@@ -94,6 +92,27 @@ public final class MJAlgorithm {
 		}
 		// TODO: YAKUHAI
 		//
+
+		// CHANTA
+		if (Hai.isYaochu(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				switch (m.type) {
+				case KOTSU:
+				case KANTSU:
+					if (!Hai.isYaochu(m.hai))
+						ok = false;
+					break;
+				case SHUNTSU:
+					if (!Hai.isYaochuStart(m.hai))
+						ok = false;
+				default:
+					assert false;
+				}
+			}
+			if (ok)
+				set.add(Yaku.CHANTA);
+		}
 
 		return set;
 	}
