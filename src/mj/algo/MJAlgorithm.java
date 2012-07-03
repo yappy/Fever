@@ -85,6 +85,7 @@ public final class MJAlgorithm {
 				case SHUNTSU:
 					if (!Hai.isChunchanStart(m.hai))
 						ok = false;
+					break;
 				default:
 					assert false;
 				}
@@ -155,6 +156,7 @@ public final class MJAlgorithm {
 				case SHUNTSU:
 					if (!Hai.isYaochuStart(m.hai))
 						ok = false;
+					break;
 				default:
 					assert false;
 				}
@@ -301,6 +303,7 @@ public final class MJAlgorithm {
 				case SHUNTSU:
 					if (!Hai.isYaochuStart(m.hai))
 						ok = false;
+					break;
 				default:
 					assert false;
 				}
@@ -411,6 +414,27 @@ public final class MJAlgorithm {
 				if (!Hai.isRoto(m.hai)) {
 					ok = false;
 					break;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.CHINROTO);
+			}
+		}
+		// RYUISO
+		if (Hai.isGreen(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				switch (m.type) {
+				case KOTSU:
+					if (!Hai.isGreen(m.hai))
+						ok = false;
+					break;
+				case SHUNTSU:
+					if (!Hai.isGreenStart(m.hai))
+						ok = false;
+					break;
+				default:
+					assert false;
 				}
 			}
 			if (ok) {

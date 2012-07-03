@@ -15,10 +15,10 @@ public final class Hai {
 
 	public static String toString(int hai) {
 		StringBuilder buf = new StringBuilder(2);
-		int kind = hai / 9;
+		int color = hai / 9;
 		int number = hai % 9 + 1;
 		buf.append(number);
-		switch (kind) {
+		switch (color) {
 		case COLOR_M:
 			buf.append('m');
 			break;
@@ -38,15 +38,15 @@ public final class Hai {
 	}
 
 	public static boolean isChunchan(int hai) {
-		int kind = hai / 9;
+		int color = hai / 9;
 		int number = hai % 9 + 1;
-		return kind != COLOR_Z && number != 1 && number != 9;
+		return color != COLOR_Z && number != 1 && number != 9;
 	}
 
 	public static boolean isChunchanStart(int hai) {
-		int kind = hai / 9;
+		int color = hai / 9;
 		int number = hai % 9 + 1;
-		return kind != COLOR_Z && number != 1 && number != 7;
+		return color != COLOR_Z && number != 1 && number != 7;
 	}
 
 	public static boolean isYaochu(int hai) {
@@ -58,9 +58,9 @@ public final class Hai {
 	}
 
 	public static boolean isRoto(int hai) {
-		int kind = hai / 9;
+		int color = hai / 9;
 		int number = hai % 9 + 1;
-		return kind != COLOR_Z && (number == 1 || number == 9);
+		return color != COLOR_Z && (number == 1 || number == 9);
 	}
 
 	public static boolean isZihai(int hai) {
@@ -69,6 +69,19 @@ public final class Hai {
 
 	public static boolean isKazehai(int hai) {
 		return hai >= 27 && hai < 30;
+	}
+
+	private static final boolean[] GREEN_TABLE = new boolean[] { false, true,
+			true, true, false, true, false, true, false };
+
+	public static boolean isGreen(int hai) {
+		int color = hai / 9;
+		int number = hai % 9 + 1;
+		return color == COLOR_S && GREEN_TABLE[number];
+	}
+
+	public static boolean isGreenStart(int hai) {
+		return hai == COLOR_S * 9 + 1;
 	}
 
 }
