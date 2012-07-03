@@ -391,6 +391,19 @@ public final class MJAlgorithm {
 				set.add(Yaku.DAISUSHI);
 			}
 		}
+		// TSUISO
+		if (Hai.isZihai(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				if (!Hai.isZihai(m.hai)) {
+					ok = false;
+					break;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.TSUISO);
+			}
+		}
 
 		return set;
 	}
