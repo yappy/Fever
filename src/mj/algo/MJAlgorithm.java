@@ -404,6 +404,19 @@ public final class MJAlgorithm {
 				set.add(Yaku.TSUISO);
 			}
 		}
+		// CHINROTO
+		if (Hai.isRoto(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				if (!Hai.isRoto(m.hai)) {
+					ok = false;
+					break;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.CHINROTO);
+			}
+		}
 
 		return set;
 	}
