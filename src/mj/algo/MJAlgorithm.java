@@ -25,17 +25,16 @@ public final class MJAlgorithm {
 		// for (Hora hora : result) {
 		// System.out.println(hora);
 		// }
-		long start = System.nanoTime();
 		maxPoint(tehai, agari, true);
-		long end = System.nanoTime();
-		System.out.printf("%dus%n", (end - start) / 1000);
 	}
 
 	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
 		if (tehai.indexOf(agari) == -1)
 			throw new MJAlgorithmException("Invalid agari hai");
 
+		StopWatch watch = new StopWatch().start();
 		List<Hora> result = enumHora(tehai);
+		watch.stop("eunmHora()");
 		if (result.isEmpty()) {
 			System.out.println("Not hora");
 			return;
@@ -48,7 +47,10 @@ public final class MJAlgorithm {
 			int hu = 0;
 			// enumYaku();
 			System.out.println(hora);
-			System.out.println(enumYaku(hora, agari, tsumo));
+			watch.start();
+			EnumSet<Yaku> yakuSet = enumYaku(hora, agari, tsumo);
+			watch.stop("enumYaku()");
+			System.out.println(yakuSet);
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
 		}
