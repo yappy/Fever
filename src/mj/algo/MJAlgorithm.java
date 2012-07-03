@@ -150,7 +150,7 @@ public final class MJAlgorithm {
 					break;
 				}
 			}
-			if(true)
+			if(ok)
 				set.add(Yaku.TOITOI);
 		}
 
