@@ -362,7 +362,7 @@ public final class MJAlgorithm {
 			if (table[i] >= 2) {
 				table[i] -= 2;
 				Hora work = new Hora();
-				work.atama = new Mentsu(Mentsu.Type.ATAMA, i, false);
+				work.atama = new Mentsu(Mentsu.Type.ATAMA, i, false, false);
 				tryMentsu(result, work, table, count - 2);
 				table[i] += 2;
 			}
@@ -381,7 +381,8 @@ public final class MJAlgorithm {
 				// kotu
 				if (table[i] >= 3) {
 					table[i] -= 3;
-					work.pushMentsu(new Mentsu(Mentsu.Type.KOTSU, i, false));
+					work.pushMentsu(new Mentsu(Mentsu.Type.KOTSU, i, false,
+							false));
 					tryMentsu(result, work, table, count - 3);
 					work.popMentsu();
 					table[i] += 3;
@@ -393,7 +394,7 @@ public final class MJAlgorithm {
 						table[i + 1]--;
 						table[i + 2]--;
 						work.pushMentsu(new Mentsu(Mentsu.Type.SHUNTSU, i,
-								false));
+								false, false));
 						tryMentsu(result, work, table, count - 3);
 						work.popMentsu();
 						table[i]++;
