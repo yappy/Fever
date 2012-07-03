@@ -271,12 +271,12 @@ public final class MJAlgorithm {
 			if (hora.atama.hai / 9 != 3) {
 				color = hora.atama.hai / 9;
 			}
-			for (int i = 0; i < 4; i++) {
-				if (hora.mentsu[i].hai / 9 != 3) {
+			for (Mentsu m : hora.mentsu) {
+				if (m.hai / 9 != 3) {
 					if (color == -1) {
-						color = hora.mentsu[i].hai / 9;
+						color = m.hai / 9;
 					} else {
-						if (hora.mentsu[i].hai / 9 != color) {
+						if (m.hai / 9 != color) {
 							ok = false;
 							break;
 						}
@@ -313,9 +313,9 @@ public final class MJAlgorithm {
 		if (hora.atama.hai / 9 != Hai.COLOR_Z) {
 			boolean ok = true;
 			int color = hora.atama.hai / 9;
-			for (int i = 0; i < 4; i++) {
-				if (hora.mentsu[i].hai / 9 != Hai.COLOR_Z) {
-					if (hora.mentsu[i].hai / 9 != color) {
+			for (Mentsu m : hora.mentsu) {
+				if (m.hai / 9 != Hai.COLOR_Z) {
+					if (m.hai / 9 != color) {
 						ok = false;
 						break;
 					}
