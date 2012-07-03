@@ -450,6 +450,59 @@ public final class MJAlgorithm {
 		return set;
 	}
 
+	private static void normalizeYakuSet(EnumSet<Yaku> set) {
+		// 2
+		if (set.contains(Yaku.DOUBLE_RICHI)) {
+			set.remove(Yaku.RICHI);
+		}
+		if (set.contains(Yaku.HONROTO)) {
+			set.remove(Yaku.CHANTA);
+		}
+
+		// 3
+		if (set.contains(Yaku.RYANPEKO)) {
+			set.remove(Yaku.IPEKO);
+		}
+		if (set.contains(Yaku.JUNCHAN)) {
+			set.remove(Yaku.CHANTA);
+		}
+
+		// 6
+		if (set.contains(Yaku.CHINITSU)) {
+			set.remove(Yaku.HONITSU);
+		}
+
+		// 13
+		if (set.contains(Yaku.SUANKO)) {
+			set.remove(Yaku.SANANKO);
+			set.remove(Yaku.TOITOI);
+		}
+		if (set.contains(Yaku.SUKANTSU)) {
+			set.remove(Yaku.SANKANTSU);
+		}
+		if (set.contains(Yaku.DAISANGEN)) {
+			set.remove(Yaku.SHOSANGEN);
+		}
+		if (set.contains(Yaku.SHOSUSHI) || set.contains(Yaku.DAISUSHI)) {
+			set.remove(Yaku.HONITSU);
+		}
+		if (set.contains(Yaku.TSUISO)) {
+			set.remove(Yaku.HONITSU);
+			set.remove(Yaku.HONROTO);
+			set.remove(Yaku.HONITSU);
+		}
+		if (set.contains(Yaku.CHINROTO)) {
+			set.remove(Yaku.JUNCHAN);
+			set.remove(Yaku.TOITOI);
+		}
+		if (set.contains(Yaku.RYUISO)) {
+			set.remove(Yaku.HONITSU);
+		}
+		if (set.contains(Yaku.CHUREN)) {
+			set.remove(Yaku.CHINITSU);
+		}
+	}
+
 	public static List<Hora> enumHora(List<Integer> tehai) {
 		if (tehai.size() % 3 != 2 || tehai.size() > 14)
 			throw new MJAlgorithmException("Invalid tehai.size");
