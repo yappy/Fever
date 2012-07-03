@@ -178,6 +178,18 @@ public final class MJAlgorithm {
 				set.add(Yaku.SANANKO);
 		}
 
+		// SANKANTSU
+		{
+			int count = 0;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type == Mentsu.Type.KOTSU) {
+					count++;
+				}
+			}
+			if (count >= 3)
+				set.add(Yaku.SANKANTSU);
+		}
+
 		return set;
 	}
 
