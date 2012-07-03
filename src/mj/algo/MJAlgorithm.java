@@ -12,10 +12,13 @@ public final class MJAlgorithm {
 
 	public static void main(String[] args) {
 		List<Integer> tehai;
+		int agari;
 		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
-		tehai = Arrays.asList(0, 0, 0, 8, 8, 8, 9, 9, 9, 17, 17, 17, 18, 18);
+		// tehai = Arrays.asList(0, 0, 0, 8, 8, 8, 9, 9, 9, 17, 17, 17, 18, 18);
+		tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7);
+		agari = 1;
 		// tehai = Arrays.asList(0, 0, 0, 31, 31, 31, 32, 32, 32, 33, 33, 1, 1,
 		// 1);
 		// List<Hora> result = enumHora(tehai);
@@ -23,7 +26,7 @@ public final class MJAlgorithm {
 		// System.out.println(hora);
 		// }
 		long start = System.nanoTime();
-		maxPoint(tehai, 0, true);
+		maxPoint(tehai, agari, true);
 		long end = System.nanoTime();
 		System.out.printf("%dus%n", (end - start) / 1000);
 	}
