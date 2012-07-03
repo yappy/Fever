@@ -86,8 +86,9 @@ public final class MJAlgorithm {
 					assert false;
 				}
 			}
-			if (ok)
+			if (ok) {
 				set.add(Yaku.TANYAO);
+			}
 		}
 		// IPEKO
 		if (!naki) {
@@ -124,10 +125,10 @@ public final class MJAlgorithm {
 					assert false;
 				}
 			}
-			if (ok)
+			if (ok) {
 				set.add(Yaku.CHANTA);
+			}
 		}
-
 		// ITTSU
 		for (int k = 0; k < 3; k++) {
 			if (shuntsuTable[k][0] >= 1 && shuntsuTable[k][3] >= 1
@@ -136,7 +137,6 @@ public final class MJAlgorithm {
 				break;
 			}
 		}
-
 		// DOJUN
 		for (int n = 0; n < 7; n++) {
 			if (shuntsuTable[0][n] >= 1 && shuntsuTable[1][n] >= 1
@@ -145,14 +145,12 @@ public final class MJAlgorithm {
 				break;
 			}
 		}
-
 		// DOKO
 		for (int n = 0; n < 9; n++) {
 			if (kotsuTable[0][n] && kotsuTable[1][n] && kotsuTable[2][n]) {
 				set.add(Yaku.DOKO);
 			}
 		}
-
 		// TOITOI
 		{
 			boolean ok = true;
@@ -162,10 +160,10 @@ public final class MJAlgorithm {
 					break;
 				}
 			}
-			if (ok)
+			if (ok) {
 				set.add(Yaku.TOITOI);
+			}
 		}
-
 		// SANANKO
 		{
 			int count = 0;
@@ -180,7 +178,6 @@ public final class MJAlgorithm {
 				set.add(Yaku.SANANKO);
 			}
 		}
-
 		// SANKANTSU
 		{
 			int count = 0;
@@ -193,7 +190,6 @@ public final class MJAlgorithm {
 				set.add(Yaku.SANKANTSU);
 			}
 		}
-
 		// SHOSANGEN
 		{
 			int count = 0;
@@ -206,7 +202,6 @@ public final class MJAlgorithm {
 				set.add(Yaku.SHOSANGEN);
 			}
 		}
-
 		// HONROTO
 		{
 			boolean ok = true;
@@ -220,8 +215,22 @@ public final class MJAlgorithm {
 					break;
 				}
 			}
-			if (ok)
+			if (ok) {
 				set.add(Yaku.HONROTO);
+			}
+		}
+
+		// RYANPEKO
+		if (!naki) {
+			int count = 0;
+			for (int k = 0; k < 3; k++) {
+				for (int n = 0; n < 7; n++) {
+					count += shuntsuTable[k][n] / 2;
+				}
+			}
+			if (count >= 2) {
+				set.add(Yaku.RYANPEKO);
+			}
 		}
 
 		return set;
