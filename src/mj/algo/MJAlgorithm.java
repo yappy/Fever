@@ -367,6 +367,30 @@ public final class MJAlgorithm {
 				set.add(Yaku.DAISANGEN);
 			}
 		}
+		// SHOSUSHI
+		if (Hai.isKazehai(hora.atama.hai)) {
+			int count = 0;
+			for (Mentsu m : hora.mentsu) {
+				if (Hai.isKazehai(m.hai)) {
+					count++;
+				}
+			}
+			if (count >= 3) {
+				set.add(Yaku.SHOSUSHI);
+			}
+		}
+		// DAISUSHI
+		{
+			int count = 0;
+			for (Mentsu m : hora.mentsu) {
+				if (Hai.isKazehai(m.hai)) {
+					count++;
+				}
+			}
+			if (count >= 4) {
+				set.add(Yaku.DAISUSHI);
+			}
+		}
 
 		return set;
 	}

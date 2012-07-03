@@ -67,4 +67,8 @@ public final class Hai {
 		return hai / 9 == COLOR_Z;
 	}
 
+	public static boolean isKazehai(int hai) {
+		return hai >= 27 && hai < 30;
+	}
+
 }
