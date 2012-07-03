@@ -15,7 +15,9 @@ public final class MJAlgorithm {
 		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
-		tehai = Arrays.asList(0, 0, 0, 9, 9, 9, 18, 18, 18, 27, 27, 27, 28, 28);
+		// tehai = Arrays.asList(0, 0, 0, 9, 9, 9, 18, 18, 18, 27, 27, 27, 28,
+		// 28);
+		tehai = Arrays.asList(0, 0, 0, 31, 31, 31, 32, 32, 32, 33, 33, 1, 1, 1);
 		// List<Hora> result = enumHora(tehai);
 		// for (Hora hora : result) {
 		// System.out.println(hora);
@@ -203,6 +205,23 @@ public final class MJAlgorithm {
 			if (count >= 2) {
 				set.add(Yaku.SHOSANGEN);
 			}
+		}
+
+		// HONROTO
+		{
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+					ok = false;
+					break;
+				}
+				if (!Hai.isYaochu(m.hai)) {
+					ok = false;
+					break;
+				}
+			}
+			if (ok)
+				set.add(Yaku.HONROTO);
 		}
 
 		return set;
