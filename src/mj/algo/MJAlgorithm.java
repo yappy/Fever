@@ -336,6 +336,9 @@ public final class MJAlgorithm {
 					break;
 				}
 			}
+			if (ok) {
+				set.add(Yaku.SUANKO);
+			}
 		}
 
 		return set;
