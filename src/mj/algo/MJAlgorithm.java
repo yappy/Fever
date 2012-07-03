@@ -54,6 +54,7 @@ public final class MJAlgorithm {
 			naki |= m.naki;
 		}
 		int[][] shuntsuTable = hora.createShuntsuTable();
+		boolean[][] kotsuTable = hora.createKotsuTable();
 
 		// TANYAO
 		if (Hai.isChunchan(hora.atama.hai)) {
@@ -112,6 +113,31 @@ public final class MJAlgorithm {
 			}
 			if (ok)
 				set.add(Yaku.CHANTA);
+		}
+
+		// ITTSU
+		for (int k = 0; k < 3; k++) {
+			if (shuntsuTable[k][0] >= 1 && shuntsuTable[k][3] >= 1
+					&& shuntsuTable[k][6] >= 1) {
+				set.add(Yaku.ITTSU);
+				break;
+			}
+		}
+
+		// DOJUN
+		for (int n = 0; n < 7; n++) {
+			if (shuntsuTable[0][n] >= 1 && shuntsuTable[1][n] >= 1
+					&& shuntsuTable[2][n] >= 1) {
+				set.add(Yaku.DOJUN);
+				break;
+			}
+		}
+
+		// DOKO
+		for (int n = 0; n < 9; n++) {
+			if (kotsuTable[0][n] && kotsuTable[1][n] && kotsuTable[2][n]) {
+				set.add(Yaku.DOKO);
+			}
 		}
 
 		return set;

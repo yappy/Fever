@@ -48,6 +48,22 @@ public class Hora {
 		return result;
 	}
 
+	/**
+	 * Count each kotsu.<br>
+	 * 
+	 * @return boolean[4][9]
+	 */
+	public boolean[][] createKotsuTable() {
+		boolean[][] result = new boolean[4][9];
+		for (int i = 0; i < 4; i++) {
+			if (mentsu[i].type == Mentsu.Type.KOTSU
+					|| mentsu[i].type == Mentsu.Type.KANTSU) {
+				result[mentsu[i].hai / 9][mentsu[i].hai % 9] = true;
+			}
+		}
+		return result;
+	}
+
 	@Override
 	public String toString() {
 		return "" + atama + mentsu[0] + mentsu[1] + mentsu[2] + mentsu[3];
