@@ -77,7 +77,7 @@ public final class Hai {
 	public static boolean isGreen(int hai) {
 		int color = hai / 9;
 		int number = hai % 9 + 1;
-		return color == COLOR_S && GREEN_TABLE[number];
+		return (color == COLOR_S && GREEN_TABLE[number]) || hai == 32;
 	}
 
 	public static boolean isGreenStart(int hai) {
