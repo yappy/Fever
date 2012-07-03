@@ -160,7 +160,7 @@ public final class MJAlgorithm {
 					break;
 				}
 			}
-			if(ok)
+			if (ok)
 				set.add(Yaku.TOITOI);
 		}
 
@@ -174,20 +174,35 @@ public final class MJAlgorithm {
 					}
 				}
 			}
-			if (count >= 3)
+			if (count >= 3) {
 				set.add(Yaku.SANANKO);
+			}
 		}
 
 		// SANKANTSU
 		{
 			int count = 0;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type == Mentsu.Type.KOTSU) {
+				if (m.type == Mentsu.Type.KANTSU) {
 					count++;
 				}
 			}
-			if (count >= 3)
+			if (count >= 3) {
 				set.add(Yaku.SANKANTSU);
+			}
+		}
+
+		// SHOSANGEN
+		{
+			int count = 0;
+			for (int i = 0; i < 3; i++) {
+				if (kotsuTable[3][4 + i]) {
+					count++;
+				}
+			}
+			if (count >= 2) {
+				set.add(Yaku.SHOSANGEN);
+			}
 		}
 
 		return set;
