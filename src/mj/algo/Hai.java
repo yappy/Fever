@@ -63,4 +63,8 @@ public final class Hai {
 		return kind != COLOR_Z && (number == 1 || number == 9);
 	}
 
+	public static boolean isZihai(int hai) {
+		return hai / 9 == COLOR_Z;
+	}
+
 }

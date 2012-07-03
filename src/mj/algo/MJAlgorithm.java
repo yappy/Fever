@@ -49,7 +49,7 @@ public final class MJAlgorithm {
 	}
 
 	/**
-	 * Enumerate yaku.
+	 * Enumerate yaku. Yakuhai is all included.
 	 * 
 	 * @param hora
 	 *            Hora form.
@@ -105,8 +105,40 @@ public final class MJAlgorithm {
 				set.add(Yaku.IPEKO);
 			}
 		}
-		// TODO: YAKUHAI
-		//
+		// YAKUHAI
+		{
+			for (Mentsu m : hora.mentsu) {
+				if (m.type == Mentsu.Type.KOTSU || m.type == Mentsu.Type.KANTSU) {
+					if (Hai.isZihai(m.hai)) {
+						switch (m.hai % 9) {
+						case 0:
+							set.add(Yaku.YAKU_0);
+							break;
+						case 1:
+							set.add(Yaku.YAKU_1);
+							break;
+						case 2:
+							set.add(Yaku.YAKU_2);
+							break;
+						case 3:
+							set.add(Yaku.YAKU_3);
+							break;
+						case 4:
+							set.add(Yaku.YAKU_4);
+							break;
+						case 5:
+							set.add(Yaku.YAKU_5);
+							break;
+						case 6:
+							set.add(Yaku.YAKU_6);
+							break;
+						default:
+							assert false;
+						}
+					}
+				}
+			}
+		}
 
 		// CHANTA
 		if (Hai.isYaochu(hora.atama.hai)) {
