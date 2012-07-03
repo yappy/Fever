@@ -33,6 +33,14 @@ public class Hora {
 		return hora;
 	}
 
+	public boolean isNaki() {
+		boolean naki = false;
+		for (Mentsu m : mentsu) {
+			naki |= m.naki;
+		}
+		return naki;
+	}
+
 	/**
 	 * Count each shuntsu.<br>
 	 * 

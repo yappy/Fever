@@ -2,6 +2,7 @@ package mj.algo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public final class MJAlgorithm {
 	}
 
 	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
-		if (tehai.indexOf(agari) == -1)
+		Collections.sort(tehai);
+		if (Collections.binarySearch(tehai, agari) < 0)
 			throw new MJAlgorithmException("Invalid agari hai");
 
 		StopWatch watch = new StopWatch().start();
@@ -56,6 +58,32 @@ public final class MJAlgorithm {
 		}
 	}
 
+	private static EnumSet<Yaku> yakuSetKokusi(List<Integer> tehai) {
+		if (tehai.size() != 14) {
+			return EnumSet.noneOf(Yaku.class);
+		}
+		int table[] = new int[34];
+		for (int hai : tehai) {
+			if (!Hai.isYaochu(hai)) {
+				return EnumSet.noneOf(Yaku.class);
+			}
+			table[hai]++;
+		}
+		boolean once = true;
+		for (int count : table) {
+			if (count == 2) {
+				if (once) {
+					once = false;
+				} else {
+					return EnumSet.noneOf(Yaku.class);
+				}
+			} else if (count >= 3) {
+				return EnumSet.noneOf(Yaku.class);
+			}
+		}
+		return EnumSet.of(Yaku.KOKUSHI);
+	}
+
 	/**
 	 * Enumerate yaku. Pinfu is excluded. Yakuhai is all included. CHITOI,
 	 * KOKUSHI, CHUREN is excluded.
@@ -71,10 +99,7 @@ public final class MJAlgorithm {
 	private static EnumSet<Yaku> enumYaku(Hora hora, int agari, boolean tsumo) {
 		EnumSet<Yaku> set = EnumSet.noneOf(Yaku.class);
 
-		boolean naki = false;
-		for (Mentsu m : hora.mentsu) {
-			naki |= m.naki;
-		}
+		boolean naki = hora.isNaki();
 		int[][] shuntsuTable = hora.createShuntsuTable();
 		boolean[][] kotsuTable = hora.createKotsuTable();
 
@@ -503,7 +528,7 @@ public final class MJAlgorithm {
 		}
 	}
 
-	public static List<Hora> enumHora(List<Integer> tehai) {
+	private static List<Hora> enumHora(List<Integer> tehai) {
 		if (tehai.size() % 3 != 2 || tehai.size() > 14)
 			throw new MJAlgorithmException("Invalid tehai.size");
 		int[] table = new int[34];
