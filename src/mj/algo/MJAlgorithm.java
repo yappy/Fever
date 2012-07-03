@@ -514,7 +514,7 @@ public final class MJAlgorithm {
 		if (set.contains(Yaku.TSUISO)) {
 			set.remove(Yaku.HONITSU);
 			set.remove(Yaku.HONROTO);
-			set.remove(Yaku.HONITSU);
+			set.remove(Yaku.TOITOI);
 		}
 		if (set.contains(Yaku.CHINROTO)) {
 			set.remove(Yaku.JUNCHAN);
