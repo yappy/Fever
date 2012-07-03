@@ -277,6 +277,26 @@ public final class MJAlgorithm {
 			}
 		}
 
+		// CHINITSU
+		if (hora.atama.hai / 9 != Hai.COLOR_Z) {
+			boolean ok = true;
+			int color = hora.atama.hai / 9;
+			for (int i = 0; i < 4; i++) {
+				if (hora.mentsu[i].hai / 9 != Hai.COLOR_Z) {
+					if (hora.mentsu[i].hai / 9 != color) {
+						ok = false;
+						break;
+					}
+				} else {
+					ok = false;
+					break;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.CHINITSU);
+			}
+		}
+
 		return set;
 	}
 
