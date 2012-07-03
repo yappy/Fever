@@ -49,7 +49,8 @@ public final class MJAlgorithm {
 	}
 
 	/**
-	 * Enumerate yaku. Yakuhai is all included.
+	 * Enumerate yaku. Pinfu is excluded. Yakuhai is all included. CHITOI,
+	 * KOKUSHI, CHUREN is excluded.
 	 * 
 	 * @param hora
 	 *            Hora form.
@@ -57,7 +58,7 @@ public final class MJAlgorithm {
 	 *            Agari hai.
 	 * @param tsumo
 	 *            tsumo or ron.
-	 * @return Yaku set(except for PINFU).
+	 * @return Yaku set.
 	 */
 	private static EnumSet<Yaku> enumYaku(Hora hora, int agari, boolean tsumo) {
 		EnumSet<Yaku> set = EnumSet.noneOf(Yaku.class);
@@ -326,6 +327,17 @@ public final class MJAlgorithm {
 			}
 			if (ok) {
 				set.add(Yaku.CHINITSU);
+			}
+		}
+
+		// SUANKO
+		if (!naki) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+					ok = false;
+					break;
+				}
 			}
 		}
 
