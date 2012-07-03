@@ -355,6 +355,18 @@ public final class MJAlgorithm {
 				set.add(Yaku.SUKANTSU);
 			}
 		}
+		// DAISANGEN
+		{
+			int count = 0;
+			for (int i = 0; i < 3; i++) {
+				if (kotsuTable[3][4 + i]) {
+					count++;
+				}
+			}
+			if (count >= 3) {
+				set.add(Yaku.DAISANGEN);
+			}
+		}
 
 		return set;
 	}
