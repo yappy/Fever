@@ -76,7 +76,6 @@ public final class MJAlgorithm {
 			for (Mentsu m : hora.mentsu) {
 				switch (m.type) {
 				case KOTSU:
-				case KANTSU:
 					if (!Hai.isChunchan(m.hai))
 						ok = false;
 					break;
@@ -109,7 +108,7 @@ public final class MJAlgorithm {
 		// YAKUHAI
 		{
 			for (Mentsu m : hora.mentsu) {
-				if (m.type == Mentsu.Type.KOTSU || m.type == Mentsu.Type.KANTSU) {
+				if (m.type == Mentsu.Type.KOTSU) {
 					if (Hai.isZihai(m.hai)) {
 						switch (m.hai % 9) {
 						case 0:
@@ -147,7 +146,6 @@ public final class MJAlgorithm {
 			for (Mentsu m : hora.mentsu) {
 				switch (m.type) {
 				case KOTSU:
-				case KANTSU:
 					if (!Hai.isYaochu(m.hai))
 						ok = false;
 					break;
@@ -188,7 +186,7 @@ public final class MJAlgorithm {
 		{
 			boolean ok = true;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+				if (m.type != Mentsu.Type.KOTSU) {
 					ok = false;
 					break;
 				}
@@ -201,7 +199,7 @@ public final class MJAlgorithm {
 		{
 			int count = 0;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type == Mentsu.Type.KOTSU || m.type == Mentsu.Type.KANTSU) {
+				if (m.type == Mentsu.Type.KOTSU) {
 					if (!m.naki && (m.hai != agari || tsumo)) {
 						count++;
 					}
@@ -215,7 +213,7 @@ public final class MJAlgorithm {
 		{
 			int count = 0;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type == Mentsu.Type.KANTSU) {
+				if (m.type == Mentsu.Type.KOTSU && m.kan) {
 					count++;
 				}
 			}
@@ -239,7 +237,7 @@ public final class MJAlgorithm {
 		{
 			boolean ok = true;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+				if (m.type != Mentsu.Type.KOTSU) {
 					ok = false;
 					break;
 				}
@@ -294,7 +292,6 @@ public final class MJAlgorithm {
 			for (Mentsu m : hora.mentsu) {
 				switch (m.type) {
 				case KOTSU:
-				case KANTSU:
 					if (!Hai.isRoto(m.hai))
 						ok = false;
 					break;
@@ -334,7 +331,7 @@ public final class MJAlgorithm {
 		if (!naki) {
 			boolean ok = true;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+				if (m.type != Mentsu.Type.KOTSU) {
 					ok = false;
 					break;
 				}

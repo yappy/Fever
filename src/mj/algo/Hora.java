@@ -56,8 +56,7 @@ public class Hora {
 	public boolean[][] createKotsuTable() {
 		boolean[][] result = new boolean[4][9];
 		for (int i = 0; i < 4; i++) {
-			if (mentsu[i].type == Mentsu.Type.KOTSU
-					|| mentsu[i].type == Mentsu.Type.KANTSU) {
+			if (mentsu[i].type == Mentsu.Type.KOTSU) {
 				result[mentsu[i].hai / 9][mentsu[i].hai % 9] = true;
 			}
 		}
