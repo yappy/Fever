@@ -255,6 +255,27 @@ public final class MJAlgorithm {
 				set.add(Yaku.HONITSU);
 			}
 		}
+		// JUNCHAN
+		if (Hai.isRoto(hora.atama.hai)) {
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				switch (m.type) {
+				case KOTSU:
+				case KANTSU:
+					if (!Hai.isRoto(m.hai))
+						ok = false;
+					break;
+				case SHUNTSU:
+					if (!Hai.isYaochuStart(m.hai))
+						ok = false;
+				default:
+					assert false;
+				}
+			}
+			if (ok) {
+				set.add(Yaku.JUNCHAN);
+			}
+		}
 
 		return set;
 	}

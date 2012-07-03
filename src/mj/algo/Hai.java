@@ -35,7 +35,7 @@ public final class Hai {
 		int number = hai % 9 + 1;
 		return kind <= 2 && number != 1 && number != 9;
 	}
-	
+
 	public static boolean isChunchanStart(int hai) {
 		int kind = hai / 9;
 		int number = hai % 9 + 1;
@@ -45,9 +45,15 @@ public final class Hai {
 	public static boolean isYaochu(int hai) {
 		return !isChunchan(hai);
 	}
-	
+
 	public static boolean isYaochuStart(int hai) {
 		return !isChunchanStart(hai);
+	}
+
+	public static boolean isRoto(int hai) {
+		int kind = hai / 9;
+		int number = hai % 9 + 1;
+		return kind <= 2 && (number == 1 || number == 9);
 	}
 
 }
