@@ -85,6 +85,35 @@ public final class MJAlgorithm {
 	}
 
 	/**
+	 * @param tehai
+	 *            This is must be sorted.
+	 * @return Yaku set.
+	 */
+	private static EnumSet<Yaku> yakuSetChitoi(List<Integer> tehai) {
+		if (tehai.size() != 14) {
+			return EnumSet.noneOf(Yaku.class);
+		}
+		for (int i = 0; i < 14; i += 2) {
+			if (tehai.get(i) != tehai.get(i + 1)) {
+				return EnumSet.noneOf(Yaku.class);
+			}
+		}
+		// forbid using same 4 hai
+		for (int i = 0; i < 12; i += 2) {
+			if (tehai.get(i) == tehai.get(i + 2)) {
+				return EnumSet.noneOf(Yaku.class);
+			}
+		}
+		// OK
+		EnumSet<Yaku> result = EnumSet.of(Yaku.CHITOI);
+		boolean tanyao = true;
+		boolean honro = true;
+		boolean tsuiso = true;
+		// TODO:
+		return result;
+	}
+
+	/**
 	 * Enumerate yaku. Pinfu is excluded. Yakuhai is all included. CHITOI,
 	 * KOKUSHI, CHUREN is excluded.
 	 * 
