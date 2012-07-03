@@ -14,7 +14,8 @@ public final class MJAlgorithm {
 		List<Integer> tehai;
 		// tehai = Arrays.asList(1, 2, 3, 1, 2, 3, 1, 2, 3, 10, 10, 10, 4, 4);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
-		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
+		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
+		tehai = Arrays.asList(0, 0, 0, 9, 9, 9, 18, 18, 18, 27, 27, 27, 28, 28);
 		// List<Hora> result = enumHora(tehai);
 		// for (Hora hora : result) {
 		// System.out.println(hora);
@@ -138,6 +139,19 @@ public final class MJAlgorithm {
 			if (kotsuTable[0][n] && kotsuTable[1][n] && kotsuTable[2][n]) {
 				set.add(Yaku.DOKO);
 			}
+		}
+
+		// TOITOI
+		{
+			boolean ok = true;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type != Mentsu.Type.KOTSU && m.type != Mentsu.Type.KANTSU) {
+					ok = false;
+					break;
+				}
+			}
+			if(true)
+				set.add(Yaku.TOITOI);
 		}
 
 		return set;
