@@ -37,21 +37,24 @@ public final class MJAlgorithm {
 		StopWatch watch = new StopWatch().start();
 		List<Hora> result = enumHora(tehai);
 		watch.stop("eunmHora()");
-		if (result.isEmpty()) {
-			System.out.println("Not hora");
-			return;
-		}
 
 		int hanmax = 0;
 		int humax = 0;
+		// kokushi
+		EnumSet<Yaku> kokushiSet = yakuSetKokushi(tehai, tsumo);
+		if (!kokushiSet.isEmpty()) {
+			// TODO
+		}
+		// chitoi
+		EnumSet<Yaku> chitoiSet = yakuSetKokushi(tehai, tsumo);
+		if (!chitoiSet.isEmpty()) {
+			// TODO
+		}
 		for (Hora hora : result) {
 			int han = 0;
 			int hu = 0;
-			// enumYaku();
 			System.out.println(hora);
-			watch.start();
 			EnumSet<Yaku> yakuSet = enumYaku(hora, agari, tsumo);
-			watch.stop("enumYaku()");
 			System.out.println(yakuSet);
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
