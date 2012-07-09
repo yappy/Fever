@@ -7,7 +7,7 @@ package mj.algo;
  */
 public enum Yaku {
 
-	PINFU(1, 0), TANYAO(1, 1), IPEKO(1, 0), RICHI(1, 0), IPPATSU(1, 0), TSUMO(
+	PINFU(1, 0), TANYAO(1, 1), IPEKO(1, 0), RICHI(1, 0), IPPATSU(1, 0), MENZEN_TSUMO(
 			1, 0), YAKU_0(1, 1), YAKU_1(1, 1), YAKU_2(1, 1), YAKU_3(1, 1), YAKU_4(
 			1, 1), YAKU_5(1, 1), YAKU_6(1, 1), HAITEI(1, 1), RINSHAN(1, 1), CHANKAN(
 			1, 1),

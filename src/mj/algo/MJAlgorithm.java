@@ -84,7 +84,7 @@ public final class MJAlgorithm {
 		}
 		EnumSet<Yaku> result = EnumSet.of(Yaku.KOKUSHI);
 		if (tsumo) {
-			result.add(Yaku.TSUMO);
+			result.add(Yaku.MENZEN_TSUMO);
 		}
 		return result;
 	}
@@ -113,7 +113,7 @@ public final class MJAlgorithm {
 		// OK
 		EnumSet<Yaku> result = EnumSet.of(Yaku.CHITOI);
 		if (tsumo) {
-			result.add(Yaku.TSUMO);
+			result.add(Yaku.MENZEN_TSUMO);
 		}
 		boolean tanyao = true;
 		boolean honro = true;
@@ -200,7 +200,7 @@ public final class MJAlgorithm {
 		}
 		// TSUMO
 		if (!naki && tsumo) {
-			set.add(Yaku.TSUMO);
+			set.add(Yaku.MENZEN_TSUMO);
 		}
 		// YAKUHAI
 		{
