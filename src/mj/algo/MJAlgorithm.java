@@ -58,7 +58,7 @@ public final class MJAlgorithm {
 		}
 	}
 
-	private static EnumSet<Yaku> yakuSetKokusi(List<Integer> tehai) {
+	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai) {
 		if (tehai.size() != 14) {
 			return EnumSet.noneOf(Yaku.class);
 		}
