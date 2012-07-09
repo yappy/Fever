@@ -58,7 +58,8 @@ public final class MJAlgorithm {
 		}
 	}
 
-	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai) {
+	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai,
+			boolean tsumo) {
 		if (tehai.size() != 14) {
 			return EnumSet.noneOf(Yaku.class);
 		}
@@ -81,7 +82,11 @@ public final class MJAlgorithm {
 				return EnumSet.noneOf(Yaku.class);
 			}
 		}
-		return EnumSet.of(Yaku.KOKUSHI);
+		EnumSet<Yaku> result = EnumSet.of(Yaku.KOKUSHI);
+		if (tsumo) {
+			result.add(Yaku.TSUMO);
+		}
+		return result;
 	}
 
 	/**
@@ -89,7 +94,8 @@ public final class MJAlgorithm {
 	 *            This is must be sorted.
 	 * @return Yaku set.
 	 */
-	private static EnumSet<Yaku> yakuSetChitoi(List<Integer> tehai) {
+	private static EnumSet<Yaku> yakuSetChitoi(List<Integer> tehai,
+			boolean tsumo) {
 		if (tehai.size() != 14) {
 			return EnumSet.noneOf(Yaku.class);
 		}
@@ -106,6 +112,9 @@ public final class MJAlgorithm {
 		}
 		// OK
 		EnumSet<Yaku> result = EnumSet.of(Yaku.CHITOI);
+		if (tsumo) {
+			result.add(Yaku.TSUMO);
+		}
 		boolean tanyao = true;
 		boolean honro = true;
 		boolean tsuiso = true;
@@ -188,6 +197,10 @@ public final class MJAlgorithm {
 			if (ok) {
 				set.add(Yaku.IPEKO);
 			}
+		}
+		// TSUMO
+		if (!naki && tsumo) {
+			set.add(Yaku.TSUMO);
 		}
 		// YAKUHAI
 		{
@@ -521,7 +534,7 @@ public final class MJAlgorithm {
 				set.add(Yaku.CHINROTO);
 			}
 		}
-		
+
 		normalizeYakuSet(set);
 
 		return set;
