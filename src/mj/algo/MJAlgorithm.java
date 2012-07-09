@@ -521,6 +521,8 @@ public final class MJAlgorithm {
 				set.add(Yaku.CHINROTO);
 			}
 		}
+		
+		normalizeYakuSet(set);
 
 		return set;
 	}
