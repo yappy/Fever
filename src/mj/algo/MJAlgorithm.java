@@ -109,7 +109,28 @@ public final class MJAlgorithm {
 		boolean tanyao = true;
 		boolean honro = true;
 		boolean tsuiso = true;
-		// TODO:
+		for (int hai : tehai) {
+			if (!Hai.isChunchan(hai)) {
+				tanyao = false;
+			}
+			if (!Hai.isYaochu(hai)) {
+				honro = false;
+			}
+			if (!Hai.isZihai(hai)) {
+				tsuiso = false;
+			}
+		}
+		if (tanyao) {
+			result.add(Yaku.TANYAO);
+		}
+		if (honro) {
+			result.add(Yaku.HONROTO);
+		}
+		if (tsuiso) {
+			result.add(Yaku.TSUISO);
+		}
+		normalizeYakuSet(result);
+
 		return result;
 	}
 
