@@ -8,8 +8,11 @@ import java.util.List;
  */
 public class Test {
 
+	// 0-8: mamzu
+	// 9-17: pinzu
+	// 18-26: sozu
+	// 27-33: zihai
 	public static void main(String[] args) {
-		// 0-8: mamzu, 9-17: pinzu, 18-26: sozu, 27-33: zihai, 34-35: empty
 		List<Integer> tehai;
 		int agari;
 		boolean tsumo;
