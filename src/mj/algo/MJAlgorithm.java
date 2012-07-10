@@ -60,7 +60,8 @@ public final class MJAlgorithm {
 			System.out.println(yakuSet);
 
 			// fu calculus
-			int fuBase = (!hora.isNaki() && !tsumo) ? 30 : 20;
+			int fuBase = 20;
+			int fuMenzanRon = (!hora.isNaki() && !tsumo) ? 10 : 0;
 			// atama fu
 			// TODO: kazehai fu
 			int fuAtama = 0;
@@ -86,7 +87,7 @@ public final class MJAlgorithm {
 			// and add pinfu
 			// try tanki
 			if (hora.atama.hai == agari) {
-				int fu = fuBase + fuAtama + fuMentsu + 2;
+				int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu + 2;
 				fu = (fu + 9) / 10 * 10;
 				HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
 				maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
@@ -110,7 +111,8 @@ public final class MJAlgorithm {
 								}
 							}
 							// TODO pinfu
-							int fu = fuBase + fuAtama + fuMentsu + fuMachi;
+							int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu
+									+ fuMachi;
 							fu = (fu + 9) / 10 * 10;
 							HoraPoint point = new HoraPoint(fu, yakuSet,
 									hora.isNaki());
