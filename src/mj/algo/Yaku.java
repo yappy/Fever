@@ -1,5 +1,7 @@
 package mj.algo;
 
+import java.util.EnumSet;
+
 /**
  * Yaku. Honitsu is (2, 1) han in fever.
  * 
@@ -37,6 +39,21 @@ public enum Yaku {
 
 	public int getKuiHan() {
 		return kuiHan;
+	}
+
+	public static int countHan(EnumSet<Yaku> yakuSet, boolean naki) {
+		int sum = 0;
+		for (Yaku yaku : yakuSet) {
+			if (naki) {
+				if (yaku.getKuiHan() <= 0)
+					throw new IllegalArgumentException(
+							"Included invalid yaku in naki");
+				sum += yaku.getKuiHan();
+			} else {
+				sum += yaku.getHan();
+			}
+		}
+		return sum;
 	}
 
 }

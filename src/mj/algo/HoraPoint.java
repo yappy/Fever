@@ -13,15 +13,14 @@ public class HoraPoint implements Comparable<HoraPoint> {
 	private int han;
 	private int fu;
 	private EnumSet<Yaku> yakuSet;
-
 	private int basePoint;
 
 	public HoraPoint() {
-		this(0, 0, EnumSet.noneOf(Yaku.class));
+		this(0, EnumSet.noneOf(Yaku.class), false);
 	}
 
-	public HoraPoint(int han, int fu, EnumSet<Yaku> yakuSet) {
-		this.han = han;
+	public HoraPoint(int fu, EnumSet<Yaku> yakuSet, boolean naki) {
+		this.han = Yaku.countHan(yakuSet, naki);
 		this.fu = fu;
 		this.yakuSet = yakuSet;
 
