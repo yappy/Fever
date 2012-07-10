@@ -92,7 +92,8 @@ public final class MJAlgorithm {
 				maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 			}
 			for (Mentsu m : hora.mentsu) {
-				// try shuntsu
+				// try mentsu
+				// TODO
 			}
 		}
 
