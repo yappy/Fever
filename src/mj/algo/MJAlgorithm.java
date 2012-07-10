@@ -93,7 +93,29 @@ public final class MJAlgorithm {
 			}
 			for (Mentsu m : hora.mentsu) {
 				// try mentsu
-				// TODO
+				if (m.type == Type.SHUNTSU) {
+					for (int k = 0; k < 3; k++) {
+						if (m.hai + k == agari) {
+							int fuMachi;
+							if (k == 1) {
+								// kanchan
+								fuMachi = 2;
+							} else {
+								// ryanmen or penchan
+								if ((m.hai % 9 == 0 && agari % 9 == 2)
+										|| (m.hai % 9 == 6 && agari % 9 == 6)) {
+									fuMachi = 2;
+								} else {
+									fuMachi = 0;
+								}
+							}
+							int fu = fuBase + fuAtama + fuMentsu + fuMachi;
+							fu = (fu + 9) / 10 * 10;
+							HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
+							maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
+						}
+					}
+				}
 			}
 		}
 
