@@ -3,6 +3,7 @@ package mj.algo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -20,14 +21,12 @@ public final class MJAlgorithm {
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3);
 		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 27, 27, 27, 28, 28);
 		// tehai = Arrays.asList(0, 0, 0, 8, 8, 8, 9, 9, 9, 17, 17, 17, 18, 18);
-		tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7);
-		agari = 1;
+		// tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7);
+		// agari = 1;
 		// tehai = Arrays.asList(0, 0, 0, 31, 31, 31, 32, 32, 32, 33, 33, 1, 1,
 		// 1);
-		// List<Hora> result = enumHora(tehai);
-		// for (Hora hora : result) {
-		// System.out.println(hora);
-		// }
+		tehai = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12);
+		agari = 0;
 		maxPoint(tehai, agari, true);
 	}
 
@@ -110,10 +109,20 @@ public final class MJAlgorithm {
 									fuMachi = 0;
 								}
 							}
-							// TODO pinfu
+							// pinfu
+							EnumSet<Yaku> pinfuedSet = yakuSet.clone();
+							if (fuAtama == 0 && fuMentsu == 0 && fuMachi == 0) {
+								if (!hora.isNaki()) {
+									pinfuedSet.add(Yaku.PINFU);
+								}
+							}
 							int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu
 									+ fuMachi;
 							fu = (fu + 9) / 10 * 10;
+							// naki pinfu
+							if (fu == 20 && hora.isNaki()) {
+								fu = 30;
+							}
 							HoraPoint point = new HoraPoint(fu, yakuSet,
 									hora.isNaki());
 							maxPoint = (point.compareTo(maxPoint) > 0) ? point
