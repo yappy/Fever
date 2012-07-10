@@ -90,4 +90,13 @@ public class HoraPoint implements Comparable<HoraPoint> {
 		return "(" + fu + "fu, " + han + ", " + basePoint + "ten," + yakuSet
 				+ ")";
 	}
+
+	public String toReadableString() {
+		int ronKo = basePoint * 4;
+		ronKo = (ronKo + 99) / 100 * 100;
+		int ronOya = basePoint * 6;
+		ronOya = (ronOya + 99) / 100 * 100;
+		return String.format("Ron %d", ronKo, ronOya);
+	}
+
 }
