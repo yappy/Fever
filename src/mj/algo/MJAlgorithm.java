@@ -43,6 +43,7 @@ public final class MJAlgorithm {
 			// fu calculus
 			int fuBase = 20;
 			int fuMenzanRon = (!hora.isNaki() && !tsumo) ? 10 : 0;
+			int fuTsumo = tsumo ? 2 : 0;
 			// atama fu
 			// TODO: kazehai fu
 			int fuAtama = 0;
@@ -68,7 +69,8 @@ public final class MJAlgorithm {
 			// and add pinfu
 			// try tanki
 			if (hora.atama.hai == agari) {
-				int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu + 2;
+				int fu = fuBase + fuMenzanRon + fuTsumo + fuAtama + fuMentsu
+						+ 2;
 				fu = (fu + 9) / 10 * 10;
 				HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
 				maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
@@ -76,7 +78,8 @@ public final class MJAlgorithm {
 			// try mentsu
 			for (Mentsu m : hora.mentsu) {
 				if (m.type == Type.KOTSU && m.hai == agari) {
-					int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu;
+					int fu = fuBase + fuMenzanRon + fuTsumo + fuAtama
+							+ fuMentsu;
 					fu = (fu + 9) / 10 * 10;
 					HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
 					maxPoint = (point.compareTo(maxPoint) > 0) ? point
@@ -99,13 +102,15 @@ public final class MJAlgorithm {
 							}
 							// pinfu
 							EnumSet<Yaku> pinfuedSet = yakuSet.clone();
+							int pinfuTsumo = 0;
 							if (fuAtama == 0 && fuMentsu == 0 && fuMachi == 0) {
 								if (!hora.isNaki()) {
 									pinfuedSet.add(Yaku.PINFU);
+									pinfuTsumo = -2;
 								}
 							}
-							int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu
-									+ fuMachi;
+							int fu = fuBase + fuMenzanRon + fuTsumo
+									+ pinfuTsumo + fuAtama + fuMentsu + fuMachi;
 							fu = (fu + 9) / 10 * 10;
 							// naki pinfu
 							if (fu == 20 && hora.isNaki()) {
