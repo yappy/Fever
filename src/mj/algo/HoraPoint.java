@@ -91,19 +91,22 @@ public class HoraPoint implements Comparable<HoraPoint> {
 				yakuSet);
 	}
 
-	public String toReadableString() {
+	public String toTsumoString() {
+		int tsumoKo1 = basePoint;
+		tsumoKo1 = (tsumoKo1 + 99) / 100 * 100;
+		int tsumoKo2 = basePoint * 2;
+		tsumoKo2 = (tsumoKo2 + 99) / 100 * 100;
+		int tsumoOya = basePoint * 2;
+		tsumoOya = (tsumoOya + 99) / 100 * 100;
+		return String.format("Tsumo (%d %d), %dall", tsumoKo1, tsumoKo2,
+				tsumoOya);
+	}
+
+	public String toRonString() {
 		int ronKo = basePoint * 4;
 		ronKo = (ronKo + 99) / 100 * 100;
 		int ronOya = basePoint * 6;
 		ronOya = (ronOya + 99) / 100 * 100;
-		int tsumoKo1 = basePoint * 2;
-		tsumoKo1 = (tsumoKo1 + 99) / 100 * 100;
-		int tsumoKo2 = basePoint;
-		tsumoKo2 = (tsumoKo2 + 99) / 100 * 100;
-		int tsumoOya = basePoint * 2;
-		tsumoOya = (tsumoOya + 99) / 100 * 100;
-		return String.format("Ron %d %d, Tsumo (%d %d) %dall", ronKo, ronOya,
-				tsumoKo1, tsumoKo2, tsumoOya);
+		return String.format("Ron %d, %d", ronKo, ronOya);
 	}
-
 }

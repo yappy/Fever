@@ -128,7 +128,11 @@ public final class MJAlgorithm {
 
 		// print max point
 		System.out.println(maxPoint);
-		System.out.println(maxPoint.toReadableString());
+		if (tsumo) {
+			System.out.println(maxPoint.toTsumoString());
+		} else {
+			System.out.println(maxPoint.toRonString());
+		}
 		System.out.println();
 	}
 
