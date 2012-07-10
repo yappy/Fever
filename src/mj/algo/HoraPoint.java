@@ -87,8 +87,8 @@ public class HoraPoint implements Comparable<HoraPoint> {
 
 	@Override
 	public String toString() {
-		return "(" + fu + "fu, " + han + ", " + basePoint + "ten," + yakuSet
-				+ ")";
+		return String.format("(%dfu, %dhan, %d, %s)", fu, han, basePoint,
+				yakuSet);
 	}
 
 	public String toReadableString() {
