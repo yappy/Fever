@@ -123,7 +123,7 @@ public final class MJAlgorithm {
 							if (fu == 20 && hora.isNaki()) {
 								fu = 30;
 							}
-							HoraPoint point = new HoraPoint(fu, yakuSet,
+							HoraPoint point = new HoraPoint(fu, pinfuedSet,
 									hora.isNaki());
 							maxPoint = (point.compareTo(maxPoint) > 0) ? point
 									: maxPoint;
