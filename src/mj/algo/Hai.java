@@ -13,6 +13,14 @@ public final class Hai {
 	public static final int COLOR_S = 2;
 	public static final int COLOR_Z = 3;
 
+	public static final int KAZE_T = 27;
+	public static final int KAZE_N = 28;
+	public static final int KAZE_S = 29;
+	public static final int KAZE_P = 30;
+	public static final int SANGEN1 = 31;
+	public static final int SANGEN2 = 32;
+	public static final int SANGEN3 = 33;
+
 	public static String toString(int hai) {
 		StringBuilder buf = new StringBuilder(2);
 		int color = hai / 9;
@@ -82,6 +90,10 @@ public final class Hai {
 
 	public static boolean isGreenStart(int hai) {
 		return hai == COLOR_S * 9 + 1;
+	}
+
+	public static boolean isSangen(int hai) {
+		return hai >= SANGEN1 && hai <= SANGEN3;
 	}
 
 }

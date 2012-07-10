@@ -48,17 +48,26 @@ public final class MJAlgorithm {
 			maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 		}
 		// others
-		StopWatch watch = new StopWatch().start();
+		// StopWatch watch = new StopWatch().start();
 		List<Hora> result = enumHora(tehai);
-		watch.stop("eunmHora()");
+		// watch.stop("eunmHora()");
 		for (Hora hora : result) {
-			int han = 0;
-			int hu = 0;
+			// get yaku list
 			System.out.println(hora);
 			EnumSet<Yaku> yakuSet = enumYaku(hora, agari, tsumo);
 			System.out.println(yakuSet);
+
+			// fu calculus
+			int fuBase = (!hora.isNaki() && !tsumo) ? 30 : 20;
+			// atama
+			// TODO: kazehai fu
+			int fuAtama = 0;
+			if (Hai.isSangen(hora.atama.hai)) {
+				fuAtama = 2;
+			}
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
+
 		}
 
 		// print max point
