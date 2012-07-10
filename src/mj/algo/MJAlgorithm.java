@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
+import mj.algo.Mentsu.Type;
+
 /**
  * @author yappy
  */
@@ -65,9 +67,26 @@ public final class MJAlgorithm {
 			if (Hai.isSangen(hora.atama.hai)) {
 				fuAtama = 2;
 			}
+			// mentsu
+			int fuMentsu = 0;
+			for (Mentsu m : hora.mentsu) {
+				if (m.type == Type.KOTSU) {
+					int plus = 2;
+					if (!m.naki)
+						plus *= 2;
+					if (Hai.isYaochu(m.hai))
+						plus *= 2;
+					if (m.kan)
+						plus *= 4;
+					fuMentsu += plus;
+				}
+			}
+			// agari
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
-
+			for (Mentsu m : hora.mentsu) {
+				
+			}
 		}
 
 		// print max point
