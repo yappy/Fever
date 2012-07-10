@@ -61,13 +61,13 @@ public final class MJAlgorithm {
 
 			// fu calculus
 			int fuBase = (!hora.isNaki() && !tsumo) ? 30 : 20;
-			// atama
+			// atama fu
 			// TODO: kazehai fu
 			int fuAtama = 0;
 			if (Hai.isSangen(hora.atama.hai)) {
 				fuAtama = 2;
 			}
-			// mentsu
+			// mentsu fu
 			int fuMentsu = 0;
 			for (Mentsu m : hora.mentsu) {
 				if (m.type == Type.KOTSU) {
@@ -81,11 +81,15 @@ public final class MJAlgorithm {
 					fuMentsu += plus;
 				}
 			}
-			// agari
+			// agari fu
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
+			if (hora.atama.hai == agari) {
+				// try tanki
+				// TODO
+			}
 			for (Mentsu m : hora.mentsu) {
-				
+				// try shuntsu
 			}
 		}
 
