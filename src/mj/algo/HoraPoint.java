@@ -96,7 +96,7 @@ public class HoraPoint implements Comparable<HoraPoint> {
 		ronKo = (ronKo + 99) / 100 * 100;
 		int ronOya = basePoint * 6;
 		ronOya = (ronOya + 99) / 100 * 100;
-		return String.format("Ron %d", ronKo, ronOya);
+		return String.format("Ron %d %d", ronKo, ronOya);
 	}
 
 }

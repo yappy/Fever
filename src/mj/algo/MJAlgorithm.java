@@ -135,6 +135,7 @@ public final class MJAlgorithm {
 
 		// print max point
 		System.out.println(maxPoint);
+		System.out.println(maxPoint.toReadableString());
 	}
 
 	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai,
