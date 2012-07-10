@@ -23,6 +23,11 @@ public class Test {
 		agari = 1;
 		tsumo = true;
 		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+
+		tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 10, 11, 12, 19, 20, 21);
+		agari = 2;
+		tsumo = true;
+		MJAlgorithm.maxPoint(tehai, agari, tsumo);
 	}
 
 }
