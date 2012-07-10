@@ -14,10 +14,10 @@ public class Test {
 		int agari;
 		boolean tsumo;
 
-		// tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 15, 16, 17, 33, 33);
-		// agari = 1;
-		// tsumo = true;
-		// MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 15, 16, 17, 33, 33);
+		agari = 1;
+		tsumo = true;
+		MJAlgorithm.maxPoint(tehai, agari, tsumo);
 
 		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 14, 15, 16, 33, 33);
 		agari = 1;

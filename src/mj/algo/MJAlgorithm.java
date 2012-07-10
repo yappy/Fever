@@ -36,9 +36,9 @@ public final class MJAlgorithm {
 		// watch.stop("eunmHora()");
 		for (Hora hora : result) {
 			// get yaku list
-			System.out.println(hora);
+			// System.out.println(hora);
 			EnumSet<Yaku> yakuSet = enumYaku(hora, agari, tsumo);
-			System.out.println(yakuSet);
+			// System.out.println(yakuSet);
 
 			// fu calculus
 			int fuBase = 20;
@@ -124,6 +124,7 @@ public final class MJAlgorithm {
 		// print max point
 		System.out.println(maxPoint);
 		System.out.println(maxPoint.toReadableString());
+		System.out.println();
 	}
 
 	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai,
