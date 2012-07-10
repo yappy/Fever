@@ -86,7 +86,10 @@ public final class MJAlgorithm {
 			// and add pinfu
 			if (hora.atama.hai == agari) {
 				// try tanki
-				// TODO
+				int fu = fuBase + fuAtama + fuMentsu + 2;
+				fu = (fu + 9) / 10 * 10;
+				HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
+				maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 			}
 			for (Mentsu m : hora.mentsu) {
 				// try shuntsu
