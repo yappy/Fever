@@ -84,15 +84,15 @@ public final class MJAlgorithm {
 			// agari fu
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
+			// try tanki
 			if (hora.atama.hai == agari) {
-				// try tanki
 				int fu = fuBase + fuAtama + fuMentsu + 2;
 				fu = (fu + 9) / 10 * 10;
 				HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
 				maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 			}
+			// try mentsu
 			for (Mentsu m : hora.mentsu) {
-				// try mentsu
 				if (m.type == Type.SHUNTSU) {
 					for (int k = 0; k < 3; k++) {
 						if (m.hai + k == agari) {
@@ -109,10 +109,13 @@ public final class MJAlgorithm {
 									fuMachi = 0;
 								}
 							}
+							// TODO pinfu
 							int fu = fuBase + fuAtama + fuMentsu + fuMachi;
 							fu = (fu + 9) / 10 * 10;
-							HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
-							maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
+							HoraPoint point = new HoraPoint(fu, yakuSet,
+									hora.isNaki());
+							maxPoint = (point.compareTo(maxPoint) > 0) ? point
+									: maxPoint;
 						}
 					}
 				}
