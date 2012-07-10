@@ -75,7 +75,13 @@ public final class MJAlgorithm {
 			}
 			// try mentsu
 			for (Mentsu m : hora.mentsu) {
-				if (m.type == Type.SHUNTSU) {
+				if (m.type == Type.KOTSU && m.hai == agari) {
+					int fu = fuBase + fuMenzanRon + fuAtama + fuMentsu;
+					fu = (fu + 9) / 10 * 10;
+					HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
+					maxPoint = (point.compareTo(maxPoint) > 0) ? point
+							: maxPoint;
+				} else if (m.type == Type.SHUNTSU) {
 					for (int k = 0; k < 3; k++) {
 						if (m.hai + k == agari) {
 							int fuMachi;
