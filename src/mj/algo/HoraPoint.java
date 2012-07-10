@@ -16,6 +16,10 @@ public class HoraPoint implements Comparable<HoraPoint> {
 
 	private int basePoint;
 
+	public HoraPoint() {
+		this(0, 0, EnumSet.noneOf(Yaku.class));
+	}
+
 	public HoraPoint(int han, int fu, EnumSet<Yaku> yakuSet) {
 		this.han = han;
 		this.fu = fu;
@@ -73,4 +77,18 @@ public class HoraPoint implements Comparable<HoraPoint> {
 		return this.basePoint - o.basePoint;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof HoraPoint))
+			return false;
+		HoraPoint o = (HoraPoint) obj;
+		return this.han == o.han && this.fu == o.fu
+				&& this.yakuSet.equals(o.yakuSet);
+	}
+
+	@Override
+	public String toString() {
+		return "(" + fu + "fu, " + han + ", " + basePoint + "ten," + yakuSet
+				+ ")";
+	}
 }

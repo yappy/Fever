@@ -34,22 +34,25 @@ public final class MJAlgorithm {
 		if (Collections.binarySearch(tehai, agari) < 0)
 			throw new MJAlgorithmException("Invalid agari hai");
 
-		StopWatch watch = new StopWatch().start();
-		List<Hora> result = enumHora(tehai);
-		watch.stop("eunmHora()");
-
-		int hanmax = 0;
-		int humax = 0;
+		HoraPoint maxPoint = new HoraPoint();
 		// kokushi
 		EnumSet<Yaku> kokushiSet = yakuSetKokushi(tehai, tsumo);
 		if (!kokushiSet.isEmpty()) {
-			// TODO
+			HoraPoint point = new HoraPoint(countHan(kokushiSet, false), 0,
+					kokushiSet);
+			maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 		}
 		// chitoi
-		EnumSet<Yaku> chitoiSet = yakuSetKokushi(tehai, tsumo);
+		EnumSet<Yaku> chitoiSet = yakuSetChitoi(tehai, tsumo);
 		if (!chitoiSet.isEmpty()) {
-			// TODO
+			HoraPoint point = new HoraPoint(countHan(chitoiSet, false), 25,
+					chitoiSet);
+			maxPoint = (point.compareTo(maxPoint) > 0) ? point : maxPoint;
 		}
+		// others
+		StopWatch watch = new StopWatch().start();
+		List<Hora> result = enumHora(tehai);
+		watch.stop("eunmHora()");
 		for (Hora hora : result) {
 			int han = 0;
 			int hu = 0;
@@ -59,6 +62,9 @@ public final class MJAlgorithm {
 			// try all forms (ryanmen, kanchan, ...)
 			// and add pinfu
 		}
+
+		// print max point
+		System.out.println(maxPoint);
 	}
 
 	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai,
@@ -594,6 +600,19 @@ public final class MJAlgorithm {
 		if (set.contains(Yaku.CHUREN)) {
 			set.remove(Yaku.CHINITSU);
 		}
+	}
+
+	private static int countHan(EnumSet<Yaku> yakuSet, boolean naki) {
+		int sum = 0;
+		for (Yaku yaku : yakuSet) {
+			if (naki) {
+				assert yaku.getKuiHan() > 0;
+				sum += yaku.getKuiHan();
+			} else {
+				sum += yaku.getHan();
+			}
+		}
+		return sum;
 	}
 
 	private static List<Hora> enumHora(List<Integer> tehai) {
