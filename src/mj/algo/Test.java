@@ -44,6 +44,14 @@ public class Test {
 		agari = 19;
 		tsumo = true;
 		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+
+		// pinfu test
+		// 1123m234678p123s 1m-T
+		tehai = Arrays
+				.asList(0, 0, 0, 1, 2, 10, 11, 12, 14, 15, 16, 18, 19, 20);
+		agari = 0;
+		MJAlgorithm.maxPoint(tehai, agari, true);
+		MJAlgorithm.maxPoint(tehai, agari, false);
 	}
 
 }
