@@ -431,7 +431,7 @@ public final class MJAlgorithm {
 			}
 		}
 		// HONROTO
-		if (Hai.isRoto(hora.atama.hai)) {
+		if (Hai.isYaochu(hora.atama.hai)) {
 			boolean ok = true;
 			for (Mentsu m : hora.mentsu) {
 				if (m.type != Mentsu.Type.KOTSU) {
