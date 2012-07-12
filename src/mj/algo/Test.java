@@ -22,20 +22,20 @@ public class Test {
 		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 15, 16, 17, 33, 33);
 		agari = 1;
 		tsumo = true;
-		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		run(tehai, agari, tsumo);
 
 		// 11122333m678p77z 2m-T
 		tehai = Arrays.asList(0, 0, 0, 1, 1, 1, 2, 2, 2, 14, 15, 16, 33, 33);
 		agari = 1;
 		tsumo = true;
-		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		run(tehai, agari, tsumo);
 
 		// kotenho
 		// 2234455m234p234s 3m-R
 		tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 10, 11, 12, 19, 20, 21);
 		agari = 2;
 		tsumo = false;
-		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		run(tehai, agari, tsumo);
 
 		// kanchan > ryanmen
 		// 22m345p12334s777z 2s-T
@@ -43,15 +43,26 @@ public class Test {
 				33);
 		agari = 19;
 		tsumo = true;
-		MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		run(tehai, agari, tsumo);
 
 		// pinfu test
 		// 1123m234678p123s 1m-T
 		tehai = Arrays
 				.asList(0, 0, 0, 1, 2, 10, 11, 12, 14, 15, 16, 18, 19, 20);
 		agari = 0;
-		MJAlgorithm.maxPoint(tehai, agari, true);
-		MJAlgorithm.maxPoint(tehai, agari, false);
+		run(tehai, agari, true);
+		run(tehai, agari, false);
+	}
+
+	private static void run(List<Integer> tehai, int agari, boolean tsumo) {
+		HoraPoint maxPoint = MJAlgorithm.maxPoint(tehai, agari, tsumo);
+		System.out.println(maxPoint);
+		if (tsumo) {
+			System.out.println(maxPoint.toTsumoString());
+		} else {
+			System.out.println(maxPoint.toRonString());
+		}
+		System.out.println();
 	}
 
 }

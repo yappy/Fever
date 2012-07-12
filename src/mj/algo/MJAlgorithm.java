@@ -12,7 +12,7 @@ import mj.algo.Mentsu.Type;
  */
 public final class MJAlgorithm {
 
-	public static void maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
+	public static HoraPoint maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
 		Collections.sort(tehai);
 		if (Collections.binarySearch(tehai, agari) < 0)
 			throw new MJAlgorithmException("Invalid agari hai");
@@ -125,15 +125,7 @@ public final class MJAlgorithm {
 				}
 			}
 		}
-
-		// print max point
-		System.out.println(maxPoint);
-		if (tsumo) {
-			System.out.println(maxPoint.toTsumoString());
-		} else {
-			System.out.println(maxPoint.toRonString());
-		}
-		System.out.println();
+		return maxPoint;
 	}
 
 	private static EnumSet<Yaku> yakuSetKokushi(List<Integer> tehai,
