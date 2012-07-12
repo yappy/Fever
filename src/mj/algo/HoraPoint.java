@@ -115,4 +115,5 @@ public class HoraPoint implements Comparable<HoraPoint> {
 		ronOya = (ronOya + 99) / 100 * 100;
 		return String.format("Ron %d, %d", ronKo, ronOya);
 	}
+
 }

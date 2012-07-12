@@ -12,7 +12,14 @@ import mj.algo.Mentsu.Type;
  */
 public final class MJAlgorithm {
 
-	public static HoraPoint maxPoint(List<Integer> tehai, int agari, boolean tsumo) {
+	public static HoraPoint maxPoint(List<Integer> tehai, int agari,
+			boolean tsumo) {
+		List<Mentsu> nakiList = Collections.emptyList();
+		return maxPoint(tehai, nakiList, agari, tsumo);
+	}
+
+	public static HoraPoint maxPoint(List<Integer> tehai,
+			List<Mentsu> nakiList, int agari, boolean tsumo) {
 		Collections.sort(tehai);
 		if (Collections.binarySearch(tehai, agari) < 0)
 			throw new MJAlgorithmException("Invalid agari hai");
@@ -32,7 +39,7 @@ public final class MJAlgorithm {
 		}
 		// others
 		// StopWatch watch = new StopWatch().start();
-		List<Hora> result = enumHora(tehai);
+		List<Hora> result = enumHora(tehai, nakiList);
 		// watch.stop("eunmHora()");
 		for (Hora hora : result) {
 			// get yaku list
@@ -663,24 +670,29 @@ public final class MJAlgorithm {
 		}
 	}
 
-	private static List<Hora> enumHora(List<Integer> tehai) {
-		if (tehai.size() % 3 != 2 || tehai.size() > 14)
+	private static List<Hora> enumHora(List<Integer> tehai,
+			List<Mentsu> nakiList) {
+		if (tehai.size() + nakiList.size() * 3 != 14)
 			throw new MJAlgorithmException("Invalid tehai.size");
 		int[] table = new int[34];
 		for (int h : tehai) {
 			table[h]++;
 		}
 		List<Hora> result = new ArrayList<>();
-		tryAtama(result, table, tehai.size());
+		Hora work = new Hora();
+		for (Mentsu m : nakiList) {
+			work.pushMentsu(m);
+		}
+		tryAtama(result, work, table, tehai.size());
 		return result;
 	}
 
-	private static void tryAtama(List<Hora> result, int[] table, int count) {
+	private static void tryAtama(List<Hora> result, Hora work, int[] table,
+			int count) {
 		assert count % 3 == 2;
 		for (int i = 0; i < 34; i++) {
 			if (table[i] >= 2) {
 				table[i] -= 2;
-				Hora work = new Hora();
 				work.atama = Mentsu.create(Mentsu.Type.ATAMA, i);
 				tryMentsu(result, work, table, count - 2);
 				table[i] += 2;
