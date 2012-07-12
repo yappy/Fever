@@ -38,6 +38,21 @@ public class Mentsu {
 		return new Mentsu(Type.KOTSU, hai, true, from, false, false);
 	}
 
+	public static Mentsu ankan(int hai) {
+		return new Mentsu(Type.KOTSU, hai, false, 0, true, false);
+	}
+
+	public static Mentsu daiminkan(int hai, int from) {
+		return new Mentsu(Type.KOTSU, hai, true, from, true, false);
+	}
+
+	public void kakan() {
+		if (type != Type.KOTSU || kan)
+			throw new MJAlgorithmException("Invalid kakan");
+		kan = true;
+		isKakan = true;
+	}
+
 	public Mentsu copy() {
 		return new Mentsu(type, hai, naki, nakiAttr, kan, isKakan);
 	}
