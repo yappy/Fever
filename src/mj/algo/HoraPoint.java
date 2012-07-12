@@ -73,7 +73,13 @@ public class HoraPoint implements Comparable<HoraPoint> {
 
 	@Override
 	public int compareTo(HoraPoint o) {
-		return this.basePoint - o.basePoint;
+		int diff = this.basePoint - o.basePoint;
+		if (diff != 0)
+			return diff;
+		diff = this.han - o.han;
+		if (diff != 0)
+			return diff;
+		return this.fu - o.fu;
 	}
 
 	@Override
