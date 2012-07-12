@@ -665,9 +665,13 @@ public final class MJAlgorithm {
 		}
 		if (set.contains(Yaku.SUKANTSU)) {
 			set.remove(Yaku.SANKANTSU);
+			set.remove(Yaku.TOITOI);
 		}
 		if (set.contains(Yaku.DAISANGEN)) {
 			set.remove(Yaku.SHOSANGEN);
+			set.remove(Yaku.YAKU_4);
+			set.remove(Yaku.YAKU_5);
+			set.remove(Yaku.YAKU_6);
 		}
 		if (set.contains(Yaku.SHOSUSHI) || set.contains(Yaku.DAISUSHI)) {
 			set.remove(Yaku.HONITSU);
