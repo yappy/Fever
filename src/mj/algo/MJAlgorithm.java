@@ -129,6 +129,14 @@ public final class MJAlgorithm {
 							}
 							int fu = fuBase + fuMenzanRon + fuTsumo
 									+ pinfuTsumo + fuAtama + fuMentsu + fuMachi;
+							// System.err.println(fuBase);
+							// System.err.println(fuMenzanRon);
+							// System.err.println(fuTsumo);
+							// System.err.println(pinfuTsumo);
+							// System.err.println(fuAtama);
+							// System.err.println(fuMentsu);
+							// System.err.println(fuMachi);
+							// System.err.println(fu);
 							fu = (fu + 9) / 10 * 10;
 							// naki pinfu
 							if (fu == 20 && hora.isNaki()) {

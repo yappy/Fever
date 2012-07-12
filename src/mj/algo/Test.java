@@ -55,10 +55,9 @@ public class Test {
 		run(tehai, agari, false);
 
 		// naki
-		//
-		List<Mentsu> naki = Arrays.asList(Mentsu.pon(1, 0));
-		tehai = Arrays.asList(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5);
-		agari = 2;
+		List<Mentsu> naki = Arrays.asList(Mentsu.pon(33, 0), Mentsu.pon(32, 0));
+		tehai = Arrays.asList(0, 1, 2, 10, 11, 12, 13, 13);
+		agari = 1;
 		run(tehai, naki, agari, true);
 		run(tehai, naki, agari, false);
 	}
