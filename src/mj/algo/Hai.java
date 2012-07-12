@@ -76,7 +76,7 @@ public final class Hai {
 	}
 
 	public static boolean isKazehai(int hai) {
-		return hai >= 27 && hai < 30;
+		return hai >= 27 && hai <= 30;
 	}
 
 	private static final boolean[] GREEN_TABLE = new boolean[] { false, true,
