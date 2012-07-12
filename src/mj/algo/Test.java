@@ -31,6 +31,13 @@ public class Test {
 		tsumo = true;
 		run(tehai, agari, tsumo);
 
+		// 111222333z111m77z 1m-R
+		tehai = Arrays.asList(27, 27, 27, 28, 28, 28, 29, 29, 29, 0, 0, 0, 33,
+				33);
+		agari = 0;
+		tsumo = false;
+		run(tehai, agari, tsumo);
+
 		// kotenho
 		// 2234455m234p234s 3m-R
 		tehai = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 10, 11, 12, 19, 20, 21);
