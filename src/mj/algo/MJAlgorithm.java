@@ -58,6 +58,7 @@ public final class MJAlgorithm {
 				fuAtama = 2;
 			}
 			// mentsu fu
+			// this must be corrected if ron
 			int fuMentsu = 0;
 			for (Mentsu m : hora.mentsu) {
 				if (m.type == Type.KOTSU) {
@@ -84,9 +85,19 @@ public final class MJAlgorithm {
 			}
 			// try mentsu
 			for (Mentsu m : hora.mentsu) {
+				// exclude naki mentsu
+				if (m.naki)
+					continue;
 				if (m.type == Type.KOTSU && m.hai == agari) {
+					// anko -> minko correction
+					int fuMentsuDiff = 0;
+					if (!tsumo) {
+						fuMentsuDiff = -2;
+						if (Hai.isYaochu(m.hai))
+							fuMentsuDiff *= 2;
+					}
 					int fu = fuBase + fuMenzanRon + fuTsumo + fuAtama
-							+ fuMentsu;
+							+ fuMentsu + fuMentsuDiff;
 					fu = (fu + 9) / 10 * 10;
 					HoraPoint point = new HoraPoint(fu, yakuSet, hora.isNaki());
 					maxPoint = (point.compareTo(maxPoint) > 0) ? point
