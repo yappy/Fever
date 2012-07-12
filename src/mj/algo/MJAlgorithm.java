@@ -529,7 +529,7 @@ public final class MJAlgorithm {
 		if (!naki) {
 			boolean ok = true;
 			for (Mentsu m : hora.mentsu) {
-				if (m.type != Mentsu.Type.KOTSU) {
+				if (m.type != Mentsu.Type.KOTSU || (m.hai == agari && !tsumo)) {
 					ok = false;
 					break;
 				}
