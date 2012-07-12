@@ -416,14 +416,14 @@ public final class MJAlgorithm {
 			}
 		}
 		// SHOSANGEN
-		{
+		if (Hai.isSangen(hora.atama.hai)) {
 			int count = 0;
 			for (int i = 0; i < 3; i++) {
 				if (kotsuTable[3][4 + i]) {
 					count++;
 				}
 			}
-			if (count >= 3) {
+			if (count >= 2) {
 				set.add(Yaku.SHOSANGEN);
 			}
 		}
