@@ -3,6 +3,18 @@ package mj.algo;
 import java.util.EnumSet;
 
 /**
+ * basePoint is calculated automatically in the constructor.
+ * <dl>
+ * <dt>Ko Ron</dt>
+ * <dd>basePoint * 4</dd>
+ * <dt>Oya Ron</dt>
+ * <dd>basePoint * 6</dd>
+ * <dt>Ko Tsumo</dt>
+ * <dd>(basePoint, basePoint * 2)</dd>
+ * <dt>Oya Tsumo</dt>
+ * <dd>basePoint * 2 all</dd>
+ * </dl>
+ * 
  * @see <a
  *      href="http://ja.wikipedia.org/wiki/%E9%BA%BB%E9%9B%80%E3%81%AE%E5%BE%97%E7%82%B9%E8%A8%88%E7%AE%97">
  *      Wikipedia: Majang point calculus</a>
