@@ -415,7 +415,7 @@ public final class MJAlgorithm {
 					count++;
 				}
 			}
-			if (count >= 2) {
+			if (count >= 3) {
 				set.add(Yaku.SHOSANGEN);
 			}
 		}
