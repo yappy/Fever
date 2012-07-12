@@ -56,6 +56,8 @@ public final class MJAlgorithm {
 			int fuAtama = 0;
 			if (Hai.isSangen(hora.atama.hai)) {
 				fuAtama = 2;
+			} else if (Hai.isKazehai(hora.atama.hai)) {
+				fuAtama = 2;
 			}
 			// mentsu fu
 			// this must be corrected if ron
@@ -299,6 +301,7 @@ public final class MJAlgorithm {
 			set.add(Yaku.MENZEN_TSUMO);
 		}
 		// YAKUHAI
+		// TODO: kazehai
 		{
 			for (Mentsu m : hora.mentsu) {
 				if (m.type == Mentsu.Type.KOTSU) {
