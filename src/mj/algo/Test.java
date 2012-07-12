@@ -1,6 +1,7 @@
 package mj.algo;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,10 +53,19 @@ public class Test {
 		agari = 0;
 		run(tehai, agari, true);
 		run(tehai, agari, false);
+
+		// naki
+		//
+		List<Mentsu> naki = Arrays.asList(Mentsu.pon(1, 0));
+		tehai = Arrays.asList(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5);
+		agari = 2;
+		run(tehai, naki, agari, true);
+		run(tehai, naki, agari, false);
 	}
 
-	private static void run(List<Integer> tehai, int agari, boolean tsumo) {
-		HoraPoint maxPoint = MJAlgorithm.maxPoint(tehai, agari, tsumo);
+	private static void run(List<Integer> tehai, List<Mentsu> naki, int agari,
+			boolean tsumo) {
+		HoraPoint maxPoint = MJAlgorithm.maxPoint(tehai, naki, agari, tsumo);
 		System.out.println(maxPoint);
 		if (tsumo) {
 			System.out.println(maxPoint.toTsumoString());
@@ -63,6 +73,10 @@ public class Test {
 			System.out.println(maxPoint.toRonString());
 		}
 		System.out.println();
+	}
+
+	private static void run(List<Integer> tehai, int agari, boolean tsumo) {
+		run(tehai, Collections.<Mentsu> emptyList(), agari, tsumo);
 	}
 
 }
