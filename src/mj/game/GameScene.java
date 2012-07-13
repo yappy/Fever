@@ -8,6 +8,7 @@ import gamelib.SceneController;
 import gamelib.graphics.SpriteSet;
 import gamelib.sound.SoundSet;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class GameScene extends PrimaryScene {
 	private MersenneTwister rand;
 	private Queue<Integer> yama = new ArrayDeque<>();
 	private List<List<Integer>> tehai = new ArrayList<>();
+
+	private static final int HAI_W = 33;
+	private static final int HAI_H = 59;
 
 	public GameScene(long randSeed) {
 		super("Game Scene", new LoadingRendererImpl());
@@ -63,14 +67,33 @@ public class GameScene extends PrimaryScene {
 
 	@Override
 	public void render(Graphics2D g) throws GameLibException, GameException {
-		// TODO Auto-generated method stub
-
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, 800, 600);
+		for (int i = 0; i < 14; i++) {
+			g.drawImage(getImage(i), HAI_W * i, 100, null);
+		}
 	}
 
 	@Override
 	protected void setupLoadResource(SpriteSet spriteSet, SoundSet soundSet) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < 27; i++) {
+			char c = 0;
+			switch (i / 9) {
+			case 0:
+				c = 'm';
+				break;
+			case 1:
+				c = 'p';
+				break;
+			case 2:
+				c = 's';
+				break;
+			default:
+				assert false;
+			}
+			String fileName = String.format("res/mj/p_%ss%d_0.gif", c,
+					i % 9 + 1);
+			spriteSet.add(fileName, HAI_W, HAI_H);
+		}
 	}
-
 }
