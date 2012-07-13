@@ -21,10 +21,10 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-
 /**
  * Base class of game main class.<br>
  * This class provides basic game framework.
+ * 
  * @author yappy
  */
 public abstract class Game {
@@ -46,9 +46,11 @@ public abstract class Game {
 	/**
 	 * Initialize and return initial scene.<br>
 	 * Called at first of game.
+	 * 
 	 * @return Initial Scene
 	 */
-	protected abstract Scene initialize() throws GameLibException, GameException;
+	protected abstract Scene initialize() throws GameLibException,
+			GameException;
 
 	/**
 	 * Called at last of game.
@@ -57,17 +59,25 @@ public abstract class Game {
 
 	protected abstract void frame() throws GameLibException, GameException;
 
-	protected abstract void renderFinish(Graphics2D g) throws GameLibException, GameException;
+	protected abstract void renderFinish(Graphics2D g) throws GameLibException,
+			GameException;
 
 	/**
 	 * Set basic information of game.
-	 * @param title Title to be displayed at title bar
-	 * @param icons Window icon list
-	 * @param width Screen width
-	 * @param height Screen height
-	 * @param fps FPS
+	 * 
+	 * @param title
+	 *            Title to be displayed at title bar
+	 * @param icons
+	 *            Window icon list
+	 * @param width
+	 *            Screen width
+	 * @param height
+	 *            Screen height
+	 * @param fps
+	 *            FPS
 	 */
-	protected Game(String title, List<Image> icons, int width, int height, int fps) {
+	protected Game(String title, List<Image> icons, int width, int height,
+			int fps) {
 		this.width = width;
 		this.height = height;
 		this.fps = fps;
@@ -91,34 +101,35 @@ public abstract class Game {
 		public GameThread() {
 			super("MainLoopThread");
 		}
+
 		@Override
 		public void run() {
-			try{
+			try {
 				frameSync.beginGame();
 				final SceneController sceneController = new SceneControllerImpl();
 				Scene initialScene = initialize();
 				sceneController.pushScene(initialScene);
 
-				GAMELOOP: while(!sceneStack.isEmpty() && !closeRequested){
+				GAMELOOP: while (!sceneStack.isEmpty() && !closeRequested) {
 					boolean render = frameSync.beginFrame();
 					frame();
 
 					// frame process
 					Scene scene;
-					do{
+					do {
 						scene = sceneStack.peek();
 						scene.doFrame(sceneController);
-						if(sceneStack.isEmpty())
+						if (sceneStack.isEmpty())
 							break GAMELOOP;
-					}
-					while(scene != sceneStack.peek());
+					} while (scene != sceneStack.peek());
 
 					// rendering
-					if(render){
-						do{
-							do{
-								Graphics2D g = (Graphics2D)bufferStrategy.getDrawGraphics();
-								if(!fullScreen){
+					if (render) {
+						do {
+							do {
+								Graphics2D g = (Graphics2D) bufferStrategy
+										.getDrawGraphics();
+								if (!fullScreen) {
 									g.translate(insets.left, insets.top);
 								}
 								// clear
@@ -129,22 +140,18 @@ public abstract class Game {
 								// for FPS etc.
 								renderFinish(g);
 								g.dispose();
-							}
-							while(bufferStrategy.contentsRestored());
+							} while (bufferStrategy.contentsRestored());
 							bufferStrategy.show();
-						}
-						while(bufferStrategy.contentsLost());
+						} while (bufferStrategy.contentsLost());
 					}
 				}
-				while(!sceneStack.isEmpty()){
+				while (!sceneStack.isEmpty()) {
 					sceneStack.pop().destroy();
 				}
 				terminate();
-			}
-			catch(Exception e){
+			} catch (Exception e) {
 				throw new GameLibError(e);
-			}
-			finally{
+			} finally {
 				frame.dispose();
 			}
 		}
@@ -152,30 +159,36 @@ public abstract class Game {
 
 	private class SceneControllerImpl implements SceneController {
 		@Override
-		public void jumpScene(Scene scene) throws GameLibException, GameException {
-			while(!sceneStack.isEmpty()){
+		public void jumpScene(Scene scene) throws GameLibException,
+				GameException {
+			while (!sceneStack.isEmpty()) {
 				popScene();
 			}
 			pushScene(scene);
 		}
+
 		@Override
 		public void popScene() throws GameLibException, GameException {
 			sceneStack.pop().destroy();
 		}
+
 		@Override
 		public void popScene(int n) throws GameLibException, GameException {
-			for(int i = 0; i < n; i++){
+			for (int i = 0; i < n; i++) {
 				popScene();
 			}
 		}
+
 		@Override
-		public void pushScene(Scene scene) throws GameLibException, GameException {
+		public void pushScene(Scene scene) throws GameLibException,
+				GameException {
 			sceneStack.push(scene);
 			scene.init(this);
 		}
+
 		@Override
 		public void quit() throws GameLibException, GameException {
-			while(!sceneStack.isEmpty()){
+			while (!sceneStack.isEmpty()) {
 				popScene();
 			}
 		}
@@ -183,7 +196,9 @@ public abstract class Game {
 
 	/**
 	 * Please call after construction only once.
-	 * @param fullScreen true if full screen
+	 * 
+	 * @param fullScreen
+	 *            true if full screen
 	 */
 	public void startGame(boolean fullScreen) {
 		setScreenMode(fullScreen);
@@ -192,7 +207,9 @@ public abstract class Game {
 
 	/**
 	 * Change screen mode.
-	 * @param fullScreen true if full screen
+	 * 
+	 * @param fullScreen
+	 *            true if full screen
 	 */
 	public void setScreenMode(boolean fullScreen) {
 		frame.dispose();
@@ -200,22 +217,27 @@ public abstract class Game {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		if(fullScreen){
-			GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		if (fullScreen) {
+			GraphicsDevice device = GraphicsEnvironment
+					.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			device.setFullScreenWindow(frame);
-			try{
+			try {
 				device.setDisplayMode(new DisplayMode(width, height, 32, fps));
-			}
-			catch(Exception e){
-				try{
-					device.setDisplayMode(new DisplayMode(width, height, 32, DisplayMode.REFRESH_RATE_UNKNOWN));
+			} catch (Exception e) {
+				try {
+					device.setDisplayMode(new DisplayMode(width, height, 32,
+							DisplayMode.REFRESH_RATE_UNKNOWN));
+				} catch (Exception e2) {
+					try {
+						device.setDisplayMode(new DisplayMode(width, height,
+								DisplayMode.BIT_DEPTH_MULTI,
+								DisplayMode.REFRESH_RATE_UNKNOWN));
+					} catch (Exception e3) {
+						throw new GameLibError(e3);
+					}
 				}
-				catch(Exception e2){
-					throw new GameLibError(e2);
-				}
 			}
-		}
-		else{
+		} else {
 			insets = frame.getInsets();
 		}
 		frame.createBufferStrategy(2);

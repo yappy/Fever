@@ -46,6 +46,7 @@ public class GameMain extends Game {
 
 	@Override
 	protected void frame() throws GameLibException, GameException {
+		keyboard.poll();
 		boolean alt = keyboard.isKeyDown(Key.LALT)
 				|| keyboard.isKeyDown(Key.RALT);
 		boolean enter = keyboard.isKeyDown(Key.RETURN);
