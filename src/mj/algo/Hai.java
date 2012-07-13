@@ -71,6 +71,10 @@ public final class Hai {
 		return color != COLOR_Z && (number == 1 || number == 9);
 	}
 
+	public static boolean isManzu(int hai) {
+		return hai / 9 == COLOR_M;
+	}
+
 	public static boolean isZihai(int hai) {
 		return hai / 9 == COLOR_Z;
 	}

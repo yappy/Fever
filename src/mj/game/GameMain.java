@@ -37,7 +37,7 @@ public class GameMain extends Game {
 
 	@Override
 	protected Scene initialize() throws GameLibException, GameException {
-		return new GameScene();
+		return new GameScene(System.currentTimeMillis());
 	}
 
 	@Override
