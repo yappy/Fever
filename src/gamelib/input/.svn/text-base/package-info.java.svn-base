@@ -1,0 +1,4 @@
+/**
+ * Input (keyboard and gamepad) classes.
+ */
+package com.d_vertex.yappylib.input;

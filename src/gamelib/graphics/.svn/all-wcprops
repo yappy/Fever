@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/tohoexe/!svn/ver/79/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics
+END
+GraphicsException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/tohoexe/!svn/ver/4/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/GraphicsException.java
+END
+SpriteSet.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/tohoexe/!svn/ver/76/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/SpriteSet.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/tohoexe/!svn/ver/33/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/package-info.java
+END
+ImageLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/tohoexe/!svn/ver/85/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/ImageLoader.java
+END
+GraphicsError.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/tohoexe/!svn/ver/33/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/GraphicsError.java
+END
+GraphicsUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/tohoexe/!svn/ver/79/trunk/GameLibrary/src/com/d_vertex/yappylib/graphics/GraphicsUtil.java
+END

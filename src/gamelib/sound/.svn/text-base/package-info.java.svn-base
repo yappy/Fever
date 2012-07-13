@@ -1,0 +1,5 @@
+/**
+ * Sound (SE, BGM) classes.
+ */
+package com.d_vertex.yappylib.sound;
+

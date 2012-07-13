@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/tohoexe/!svn/ver/84/trunk/GameLibrary/src/com/d_vertex/yappylib/util
+END
+MTRandom.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/tohoexe/!svn/ver/48/trunk/GameLibrary/src/com/d_vertex/yappylib/util/MTRandom.java
+END
+PropertyTemplete.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/tohoexe/!svn/ver/76/trunk/GameLibrary/src/com/d_vertex/yappylib/util/PropertyTemplete.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/tohoexe/!svn/ver/33/trunk/GameLibrary/src/com/d_vertex/yappylib/util/package-info.java
+END
+Version.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/tohoexe/!svn/ver/58/trunk/GameLibrary/src/com/d_vertex/yappylib/util/Version.java
+END
+XMLPropertyTemplete.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/tohoexe/!svn/ver/84/trunk/GameLibrary/src/com/d_vertex/yappylib/util/XMLPropertyTemplete.java
+END
+FileInputStreamEx.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/tohoexe/!svn/ver/85/trunk/GameLibrary/src/com/d_vertex/yappylib/util/FileInputStreamEx.java
+END
+PropertiesEx.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/tohoexe/!svn/ver/54/trunk/GameLibrary/src/com/d_vertex/yappylib/util/PropertiesEx.java
+END
+StopWatch.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/tohoexe/!svn/ver/4/trunk/GameLibrary/src/com/d_vertex/yappylib/util/StopWatch.java
+END
+Delay.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/tohoexe/!svn/ver/34/trunk/GameLibrary/src/com/d_vertex/yappylib/util/Delay.java
+END
+Trace.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/tohoexe/!svn/ver/54/trunk/GameLibrary/src/com/d_vertex/yappylib/util/Trace.java
+END

@@ -1,0 +1,13 @@
+package com.d_vertex.yappylib.resource;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * @author yappy
+ */
+public interface ResourceSystem {
+
+	InputStream getInputStream(String name) throws IOException;
+
+}
