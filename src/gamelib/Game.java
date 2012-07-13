@@ -29,8 +29,6 @@ import javax.swing.JFrame;
  */
 public abstract class Game {
 
-	private static final long serialVersionUID = 1L;
-
 	/** Frame synchronizer. */
 	protected FrameSync frameSync;
 
@@ -76,6 +74,7 @@ public abstract class Game {
 		frameSync = new FrameSync(fps, 2);
 
 		frame = new JFrame(title);
+		frame.setResizable(false);
 		frame.setIconImages(icons);
 		frame.setIgnoreRepaint(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
