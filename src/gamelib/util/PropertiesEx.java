@@ -12,8 +12,6 @@ import java.util.Properties;
  */
 public class PropertiesEx {
 
-	private static final long serialVersionUID = -5129218517529407170L;
-
 	private Properties prop;
 
 	public PropertiesEx() {
