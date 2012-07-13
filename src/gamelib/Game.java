@@ -201,6 +201,7 @@ public abstract class Game {
 	 *            true if full screen
 	 */
 	public void startGame(boolean fullScreen) {
+		printDisplayModes();
 		setScreenMode(fullScreen);
 		new GameThread().start();
 	}
@@ -268,18 +269,28 @@ public abstract class Game {
 		ImageCapabilities front = cap.getFrontBufferCapabilities();
 		ImageCapabilities back = cap.getBackBufferCapabilities();
 
-		Trace.info("BufferStrategy Caps");
+		Trace.info("[BufferStrategy Caps]");
 		Trace.info("MultiBuffer: " + cap.isMultiBufferAvailable());
 		Trace.info("Flip: " + cap.isPageFlipping());
 		Trace.info("FullScreenRequired: " + cap.isFullScreenRequired());
 
-		Trace.info("FrontBuffer Caps");
+		Trace.info("[FrontBuffer Caps]");
 		Trace.info("Acceleration: " + front.isAccelerated());
 		Trace.info("VideoMemory: " + front.isTrueVolatile());
 
-		Trace.info("BackBuffer Caps");
+		Trace.info("[BackBuffer Caps]");
 		Trace.info("Acceleration: " + back.isAccelerated());
 		Trace.info("VideoMemory: " + back.isTrueVolatile());
+	}
+
+	private void printDisplayModes() {
+		GraphicsDevice device = GraphicsEnvironment
+				.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		Trace.info("[Display Modes]");
+		for (DisplayMode mode : device.getDisplayModes()) {
+			Trace.info("%dx%d %dbit %dHz", mode.getWidth(), mode.getHeight(),
+					mode.getBitDepth(), mode.getRefreshRate());
+		}
 	}
 
 }
