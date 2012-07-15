@@ -131,17 +131,19 @@ public class GameScene extends PrimaryScene {
 			break;
 		case 2:
 			for (int i = 0; i < list.size(); i++) {
-				int hai = list.get(i) / 4;
-				g.drawImage(getImage(imgHaiBack), 0 + HAI_W * i, 100, null);
+				g.drawImage(getImage(imgHaiBackV), 0 + HAI_W * i, 100, null);
 			}
 			break;
 		// TODO kamicha, shimocha
 		case 1:
+			for (int i = 0; i < list.size(); i++) {
+				g.drawImage(getImage(imgHaiBackH), 500, 0 + HAI_W * i, null);
+			}
 		case 3:
 		}
 	}
 
-	private int imgHaiBack;
+	private int imgHaiBackV, imgHaiBackH;
 
 	@Override
 	protected void setupLoadResource(SpriteSet spriteSet, SoundSet soundSet) {
@@ -157,7 +159,8 @@ public class GameScene extends PrimaryScene {
 			String fileName = String.format("res/mj/p_%s_0.gif", zi[i]);
 			spriteSet.add(fileName, HAI_W, HAI_H);
 		}
-		imgHaiBack = spriteSet.add("res/mj/p_bk_0.gif", HAI_W, HAI_H);
+		imgHaiBackV = spriteSet.add("res/mj/p_bk_0.gif", HAI_W, HAI_H);
+		imgHaiBackH = spriteSet.add("res/mj/p_bk_3.gif", 44, 49);
 	}
 
 }
