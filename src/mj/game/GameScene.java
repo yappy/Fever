@@ -26,6 +26,14 @@ public class GameScene extends PrimaryScene {
 	private MersenneTwister rand;
 	private Queue<Integer> yama = new ArrayDeque<>();
 	private List<List<Integer>> tehai = new ArrayList<>();
+	// ID sequence
+	private List<Integer> turnMap = new ArrayList<>();
+	// ID (0..2|3)
+	private int myID = 0;
+	// index of myID in turnMap
+	private int myIndex = -1;
+	// global turn count
+	private int turn = 0;
 
 	private static final int HAI_W = 33;
 	private static final int HAI_H = 59;
@@ -38,6 +46,20 @@ public class GameScene extends PrimaryScene {
 	private void initGame(long randSeed) {
 		rand = new MersenneTwister(randSeed);
 
+		// seat shuffle
+		for (int i = 0; i < 3; i++) {
+			turnMap.add(i);
+		}
+		Collections.shuffle(turnMap, rand);
+		// find my seat index
+		for (int i = 0; i < turnMap.size(); i++) {
+			if (turnMap.get(i) == myID) {
+				myIndex = i;
+			}
+		}
+		assert myIndex >= 0 && myIndex < turnMap.size();
+
+		// yama shuffle
 		List<Integer> list = new ArrayList<>();
 		for (int i = 0; i < 136; i++) {
 			int hai = i / 4;
@@ -49,11 +71,13 @@ public class GameScene extends PrimaryScene {
 		Collections.shuffle(list, rand);
 		yama = new ArrayDeque<>(list);
 
+		// haipai
 		for (int i = 0; i < 3; i++) {
 			List<Integer> hand = new ArrayList<>();
 			for (int t = 0; t < 14; t++) {
 				hand.add(yama.poll());
 			}
+			Collections.sort(hand);
 			tehai.add(hand);
 		}
 	}
@@ -67,33 +91,47 @@ public class GameScene extends PrimaryScene {
 
 	@Override
 	public void render(Graphics2D g) throws GameLibException, GameException {
+		// clear
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, 800, 600);
-		for (int i = 0; i < 14; i++) {
-			g.drawImage(getImage(i), HAI_W * i, 100, null);
+		// draw tehai
+
+		for (int i = 0; i < turnMap.size(); i++) {
+			int pos = ((i - myIndex) + 4) % 4;
+			assert pos >= 0 && pos < 4;
+			drawTehai(g, turnMap.get(i), pos);
+		}
+		// for (int i = 0; i < 14; i++) {
+		// g.drawImage(getImage(i), HAI_W * i, 100, null);
+		// }
+	}
+
+	private void drawTehai(Graphics2D g, int id, int pos) {
+		// TODO drawTehai
+		if (pos == 0) {
+			List<Integer> list = tehai.get(id);
+			for (int i = 0; i < list.size(); i++) {
+				int hai = list.get(i) / 4;
+				g.drawImage(getImage(hai), 0 + HAI_W * i, 500, null);
+			}
 		}
 	}
 
 	@Override
 	protected void setupLoadResource(SpriteSet spriteSet, SoundSet soundSet) {
+		final char[] color = new char[] { 'm', 'p', 's' };
+		final String[] zi = new String[] { "ji_e", "ji_s", "ji_w", "ji_n",
+				"no", "ji_h", "ji_c" };
 		for (int i = 0; i < 27; i++) {
-			char c = 0;
-			switch (i / 9) {
-			case 0:
-				c = 'm';
-				break;
-			case 1:
-				c = 'p';
-				break;
-			case 2:
-				c = 's';
-				break;
-			default:
-				assert false;
-			}
-			String fileName = String.format("res/mj/p_%ss%d_0.gif", c,
-					i % 9 + 1);
+			String fileName = String.format("res/mj/p_%ss%d_0.gif",
+					color[i / 9], i % 9 + 1);
+			spriteSet.add(fileName, HAI_W, HAI_H);
+		}
+		for (int i = 0; i < 7; i++) {
+			String fileName = String
+					.format("res/mj/p_%s_0.gif", zi[i]);
 			spriteSet.add(fileName, HAI_W, HAI_H);
 		}
 	}
+
 }

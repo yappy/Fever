@@ -6,6 +6,16 @@
 あと555666777p3599sとか
 
 
+===MEMO===
+myID = 1
+turnMap = [2, 0, 1]
+myIndex = 2
+local position assignment:
+ 2
+1 3
+ 0
+
+
 ===TODO===
 ●ツモ/ロンでのアンコ/ミンコ扱いの符計算になってない
 	OK(not tested)
