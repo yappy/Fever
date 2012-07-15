@@ -1,5 +1,6 @@
 package gamelib;
 
+import gamelib.input.InputManager;
 import gamelib.util.Trace;
 
 import java.awt.BufferCapabilities;
@@ -20,6 +21,8 @@ import java.util.Deque;
 import java.util.List;
 
 import javax.swing.JFrame;
+
+import net.java.games.input.Keyboard;
 
 /**
  * Base class of game main class.<br>
@@ -105,6 +108,7 @@ public abstract class Game {
 		@Override
 		public void run() {
 			try {
+				Keyboard keyboard = InputManager.GetInstance().getKeyboard();
 				frameSync.beginGame();
 				final SceneController sceneController = new SceneControllerImpl();
 				Scene initialScene = initialize();
@@ -112,6 +116,7 @@ public abstract class Game {
 
 				GAMELOOP: while (!sceneStack.isEmpty() && !closeRequested) {
 					boolean render = frameSync.beginFrame();
+					keyboard.poll();
 					frame();
 
 					// frame process

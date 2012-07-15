@@ -6,6 +6,7 @@ import gamelib.GameLibException;
 import gamelib.PrimaryScene;
 import gamelib.SceneController;
 import gamelib.graphics.SpriteSet;
+import gamelib.input.InputManager;
 import gamelib.sound.SoundSet;
 
 import java.awt.Color;
@@ -17,6 +18,8 @@ import java.util.List;
 import java.util.Queue;
 
 import mj.algo.Hai;
+import net.java.games.input.Component.Identifier.Key;
+import net.java.games.input.Keyboard;
 
 /**
  * @author yappy
@@ -85,8 +88,18 @@ public class GameScene extends PrimaryScene {
 	@Override
 	public void doFrame(SceneController sceneController)
 			throws GameLibException, GameException {
-		// TODO Auto-generated method stub
-
+		final Keyboard keyboard = InputManager.GetInstance().getKeyboard();
+		if (keyboard.isKeyDown(Key.LEFT)) {
+			myID--;
+		} else if (keyboard.isKeyDown(Key.RIGHT)) {
+			myID++;
+		}
+		myID = (myID + 4) % 4;
+		for (int i = 0; i < turnMap.size(); i++) {
+			if (turnMap.get(i) == myID) {
+				myIndex = i;
+			}
+		}
 	}
 
 	@Override
@@ -95,7 +108,6 @@ public class GameScene extends PrimaryScene {
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, 800, 600);
 		// draw tehai
-
 		for (int i = 0; i < turnMap.size(); i++) {
 			int pos = ((i - myIndex) + 4) % 4;
 			assert pos >= 0 && pos < 4;
@@ -108,14 +120,28 @@ public class GameScene extends PrimaryScene {
 
 	private void drawTehai(Graphics2D g, int id, int pos) {
 		// TODO drawTehai
-		if (pos == 0) {
-			List<Integer> list = tehai.get(id);
+		List<Integer> list = tehai.get(id);
+		switch (pos) {
+		// myself
+		case 0:
 			for (int i = 0; i < list.size(); i++) {
 				int hai = list.get(i) / 4;
 				g.drawImage(getImage(hai), 0 + HAI_W * i, 500, null);
 			}
+			break;
+		case 2:
+			for (int i = 0; i < list.size(); i++) {
+				int hai = list.get(i) / 4;
+				g.drawImage(getImage(imgHaiBack), 0 + HAI_W * i, 100, null);
+			}
+			break;
+		// TODO kamicha, shimocha
+		case 1:
+		case 3:
 		}
 	}
+
+	private int imgHaiBack;
 
 	@Override
 	protected void setupLoadResource(SpriteSet spriteSet, SoundSet soundSet) {
@@ -128,10 +154,10 @@ public class GameScene extends PrimaryScene {
 			spriteSet.add(fileName, HAI_W, HAI_H);
 		}
 		for (int i = 0; i < 7; i++) {
-			String fileName = String
-					.format("res/mj/p_%s_0.gif", zi[i]);
+			String fileName = String.format("res/mj/p_%s_0.gif", zi[i]);
 			spriteSet.add(fileName, HAI_W, HAI_H);
 		}
+		imgHaiBack = spriteSet.add("res/mj/p_bk_0.gif", HAI_W, HAI_H);
 	}
 
 }
