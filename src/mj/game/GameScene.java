@@ -6,6 +6,8 @@ import gamelib.GameLibException;
 import gamelib.PrimaryScene;
 import gamelib.SceneController;
 import gamelib.graphics.SpriteSet;
+import gamelib.input.InputConfiguration;
+import gamelib.input.InputDevice;
 import gamelib.input.InputManager;
 import gamelib.sound.SoundSet;
 
@@ -37,6 +39,10 @@ public class GameScene extends PrimaryScene {
 	private int myIndex = -1;
 	// global turn count
 	private int turn = 0;
+
+	// temp
+	private static InputDevice input = new InputConfiguration(1, new String[] {
+			"", "", "", "", "OK", "Cancel" }).createInputDevice(0);
 
 	private static final int HAI_W = 33;
 	private static final int HAI_H = 59;
@@ -88,10 +94,10 @@ public class GameScene extends PrimaryScene {
 	@Override
 	public void doFrame(SceneController sceneController)
 			throws GameLibException, GameException {
-		final Keyboard keyboard = InputManager.GetInstance().getKeyboard();
-		if (keyboard.isKeyDown(Key.LEFT)) {
+		input.poll();
+		if (input.isDownFirst(InputDevice.ID_LEFT)) {
 			myID--;
-		} else if (keyboard.isKeyDown(Key.RIGHT)) {
+		} else if (input.isDownFirst(InputDevice.ID_RIGHT)) {
 			myID++;
 		}
 		myID = (myID + 4) % 4;
