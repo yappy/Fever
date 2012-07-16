@@ -15,6 +15,35 @@ local position assignment:
 1 3
  0
 
+状態遷移
+これらとは別にプレイヤーIDもあり
+掛け算した状態数になる
+リーチは別にフラグで
+PLAY (ツモった後)
+	→ツモ
+	→捨牌(→REACTION)
+	→暗カン(→KAN_INTERRUPT)
+	→加カン(→KAN_INTERRUPT)
+KAN (リンシャンツモ後)
+	→ツモ(リンシャン役)
+	→捨牌(→REACTION)
+	→暗カン(→KAN_INTERRUPT)
+	→加カン(→KAN_INTERRUPT)
+PON_CHI
+	→捨牌(→REACTION)
+	※カン不可
+反応待ち
+※他全員の反応が出揃うまで待って最大優先度のものを処理
+REACTION
+	→スルー(→下家のPLAYへ)
+	→ロン
+	→ポン(→発声者のPON_CHIへ)
+	→チー(→発声者のPON_CHIへ)
+	→ダイミンカン(→発声者のKANへ)
+KAN_INTERRUPT (暗カン・加カン発声後リンシャンツモ前)
+	→スルー(→KANへ)
+	→ロン(+チャンカン役)(国士もこっち)
+
 
 ===TODO===
 ●ツモ/ロンでのアンコ/ミンコ扱いの符計算になってない

@@ -44,6 +44,11 @@ public class GameScene extends PrimaryScene {
 	private static final int HAI_W = 33;
 	private static final int HAI_H = 59;
 
+	// TODO State enum
+	private static enum MJState {
+
+	}
+
 	public GameScene(long randSeed) {
 		super("Game Scene", new LoadingRendererImpl());
 		initGame(randSeed);
