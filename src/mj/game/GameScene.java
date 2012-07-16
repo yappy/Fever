@@ -8,7 +8,6 @@ import gamelib.SceneController;
 import gamelib.graphics.SpriteSet;
 import gamelib.input.InputConfiguration;
 import gamelib.input.InputDevice;
-import gamelib.input.InputManager;
 import gamelib.sound.SoundSet;
 
 import java.awt.Color;
@@ -20,8 +19,6 @@ import java.util.List;
 import java.util.Queue;
 
 import mj.algo.Hai;
-import net.java.games.input.Component.Identifier.Key;
-import net.java.games.input.Keyboard;
 
 /**
  * @author yappy
