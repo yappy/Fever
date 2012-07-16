@@ -10,6 +10,7 @@ import net.java.games.input.Controller.Type;
 /**
  * ID 0,1,2,3 are directional input.<br>
  * The others are button input.
+ * 
  * @author yappy
  */
 public abstract class InputDevice {
@@ -20,10 +21,9 @@ public abstract class InputDevice {
 	public static final int ID_RIGHT = 3;
 
 	public static InputDevice createInputDevice(Controller con, int[] keyMap) {
-		if(con.getType() == Type.KEYBOARD){
+		if (con.getType() == Type.KEYBOARD) {
 			return new KeyboradDevice(con, keyMap);
-		}
-		else{
+		} else {
 			return new GamepadDevice(con, keyMap);
 		}
 	}
@@ -37,32 +37,31 @@ public abstract class InputDevice {
 		buttons = new Component[keyMap.length];
 		count = new int[keyMap.length];
 		Component[] coms = con.getComponents();
-		for(int i = 0; i < keyMap.length; i++){
-			if(keyMap[i] == -1 || keyMap[i] >= coms.length)
+		for (int i = 0; i < keyMap.length; i++) {
+			if (keyMap[i] == -1 || keyMap[i] >= coms.length)
 				buttons[i] = null;
 			else
 				buttons[i] = coms[keyMap[i]];
 		}
 	}
-	
-	public void clearOldInput(){
+
+	public void clearOldInput() {
 		Arrays.fill(count, 0);
 	}
 
 	public void poll() {
 		con.poll();
-		for(int i = 0; i < buttons.length; i++){
-			if(getButtonState(i)){
+		for (int i = 0; i < buttons.length; i++) {
+			if (getButtonState(i)) {
 				count[i]++;
-			}
-			else{
+			} else {
 				count[i] = 0;
 			}
 		}
 	}
 
 	protected boolean getButtonState(int id) {
-		if(buttons[id] == null)
+		if (buttons[id] == null)
 			return false;
 		return buttons[id].getPollData() > 0.5f;
 	}
@@ -72,8 +71,8 @@ public abstract class InputDevice {
 	}
 
 	public boolean isDownAny() {
-		for(int i = 0; i < buttons.length; i++){
-			if(isDown(i)){
+		for (int i = 0; i < buttons.length; i++) {
+			if (isDown(i)) {
 				return true;
 			}
 		}
@@ -85,8 +84,8 @@ public abstract class InputDevice {
 	}
 
 	public boolean isDownFirstAny() {
-		for(int i = 0; i < buttons.length; i++){
-			if(isDownFirst(i)){
+		for (int i = 0; i < buttons.length; i++) {
+			if (isDownFirst(i)) {
 				return true;
 			}
 		}
@@ -107,11 +106,12 @@ public abstract class InputDevice {
 			axisx = con.getComponent(Identifier.Axis.X);
 			axisy = con.getComponent(Identifier.Axis.Y);
 		}
+
 		@Override
 		protected boolean getButtonState(int id) {
-			if(axisx == null || axisy == null)
+			if (axisx == null || axisy == null)
 				return false;
-			switch(id){
+			switch (id) {
 			case ID_UP:
 				return axisy.getPollData() < -0.5f;
 			case ID_DOWN:
