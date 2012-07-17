@@ -29,6 +29,7 @@ public class GameScene extends PrimaryScene {
 
 	/* MJ Game Data */
 	private MersenneTwister rand;
+	private int playerCount;
 	private Queue<Integer> yama = new ArrayDeque<>();
 	private List<List<Integer>> tehai = new ArrayList<>();
 	// ID sequence
@@ -39,11 +40,14 @@ public class GameScene extends PrimaryScene {
 	private int myIndex = -1;
 	// whose turn (turnMap index)
 	private int turnIndex = 0;
+	// state
+	private MJState mjState = MJState.START;
 
 	/* Action Stream */
 	private static final int QUEUE_SIZE = 16;
 	private BlockingQueue<MJAction> actionQueue = new ArrayBlockingQueue<>(
 			QUEUE_SIZE, true);
+	private MJAction[] actionBuffer;
 
 	/* Device */
 	// temp
@@ -53,11 +57,6 @@ public class GameScene extends PrimaryScene {
 	private static final int HAI_W = 33;
 	private static final int HAI_H = 59;
 
-	// TODO State enum
-	private static enum MJState {
-		PLAY, KAN, PON_CHI
-	}
-
 	public GameScene(long randSeed) {
 		super("Game Scene", new LoadingRendererImpl());
 		initGame(randSeed);
@@ -65,6 +64,10 @@ public class GameScene extends PrimaryScene {
 
 	private void initGame(long randSeed) {
 		rand = new MersenneTwister(randSeed);
+
+		// sanma
+		playerCount = 3;
+		actionBuffer = new MJAction[playerCount];
 
 		// seat shuffle
 		for (int i = 0; i < 3; i++) {
@@ -102,19 +105,71 @@ public class GameScene extends PrimaryScene {
 		}
 	}
 
+	private void drawHai(int id) {
+		assert yama.size() > 0;
+		tehai.get(id).add(yama.poll());
+	}
+
+	private boolean isMyTurn() {
+		return getTurnPlayerID() == myID;
+	}
+
+	private int getTurnPlayerID() {
+		return turnMap.get(turnIndex);
+	}
+
+	private void sendAction(MJAction action) throws GameException {
+		// TODO: send to everyone across network
+		if (!actionQueue.offer(action))
+			throw new GameException();
+	}
+
 	@Override
 	public void doFrame(SceneController sceneController)
 			throws GameLibException, GameException {
 		input.poll();
-		if (input.isDownFirst(InputDevice.ID_LEFT)) {
-			myID--;
-		} else if (input.isDownFirst(InputDevice.ID_RIGHT)) {
-			myID++;
+
+		// poll 1 element
+		MJAction action = actionQueue.poll();
+		if (action != null) {
+			int id = action.id;
+			if (id < 0 || id >= playerCount)
+				throw new GameException("Invalid ID: " + id);
+			if (actionBuffer[id] != null)
+				throw new GameException("Buffer is not empty: " + id);
+			actionBuffer[id] = action;
 		}
-		myID = (myID + 4) % 4;
-		for (int i = 0; i < turnMap.size(); i++) {
-			if (turnMap.get(i) == myID) {
-				myIndex = i;
+		boolean actionAll = true;
+		for (MJAction a : actionBuffer) {
+			actionAll &= (a != null);
+		}
+
+		// state transition
+		switch (mjState) {
+		case START:
+			mjState = MJState.PLAY;
+			drawHai(getTurnPlayerID());
+			if (!isMyTurn()) {
+				sendAction(new MJAction(MJAction.Action.OK, myID));
+			}
+			// TODO: temp dummy players
+			for (int i = 1; i < playerCount; i++) {
+				sendAction(new MJAction(MJAction.Action.OK, i));
+			}
+			break;
+		case PLAY:
+			if (actionAll) {
+				System.err.println("next!");
+			}
+			break;
+		default:
+			assert false;
+		}
+
+		// my turn && PLAY
+		if (isMyTurn()) {
+			if (input.isDownFirstAny()) {
+				sendAction(new MJAction(MJAction.Action.DISCARD, myID));
 			}
 		}
 	}
