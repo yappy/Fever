@@ -5,6 +5,7 @@ import gamelib.GameException;
 import gamelib.GameLibException;
 import gamelib.Scene;
 import gamelib.input.InputManager;
+import gamelib.util.Trace;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -65,6 +66,7 @@ public class GameMain extends Game {
 	}
 
 	public static void main(String[] args) {
+		Trace.setDebug(true);
 		GameMain main = new GameMain();
 		main.startGame(false);
 	}

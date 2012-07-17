@@ -9,11 +9,13 @@ import gamelib.graphics.SpriteSet;
 import gamelib.input.InputConfiguration;
 import gamelib.input.InputDevice;
 import gamelib.sound.SoundSet;
+import gamelib.util.Trace;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -32,6 +34,7 @@ public class GameScene extends PrimaryScene {
 	private int playerCount;
 	private Queue<Integer> yama = new ArrayDeque<>();
 	private List<List<Integer>> tehai = new ArrayList<>();
+	private List<List<Integer>> sutehai = new ArrayList<>();
 	// ID sequence
 	private List<Integer> turnMap = new ArrayList<>();
 	// ID (0..2|3)
@@ -74,6 +77,7 @@ public class GameScene extends PrimaryScene {
 			turnMap.add(i);
 		}
 		Collections.shuffle(turnMap, rand);
+		Trace.debug("turnMap: %s", turnMap);
 		// find my seat index
 		for (int i = 0; i < turnMap.size(); i++) {
 			if (turnMap.get(i) == myID) {
@@ -97,12 +101,20 @@ public class GameScene extends PrimaryScene {
 		// haipai
 		for (int i = 0; i < playerCount; i++) {
 			List<Integer> hand = new ArrayList<>();
-			for (int t = 0; t < 14; t++) {
+			for (int t = 0; t < 13; t++) {
 				hand.add(yama.poll());
 			}
 			Collections.sort(hand);
 			tehai.add(hand);
 		}
+		// sutehai
+		for (int i = 0; i < playerCount; i++) {
+			sutehai.add(new ArrayList<Integer>());
+		}
+	}
+
+	private void clearActionBuffer() {
+		Arrays.fill(actionBuffer, null);
 	}
 
 	private void drawHai(int id) {
@@ -130,14 +142,14 @@ public class GameScene extends PrimaryScene {
 		input.poll();
 
 		// poll 1 element
-		MJAction action = actionQueue.poll();
-		if (action != null) {
-			int id = action.id;
+		MJAction nextAction = actionQueue.poll();
+		if (nextAction != null) {
+			int id = nextAction.id;
 			if (id < 0 || id >= playerCount)
 				throw new GameException("Invalid ID: " + id);
 			if (actionBuffer[id] != null)
 				throw new GameException("Buffer is not empty: " + id);
-			actionBuffer[id] = action;
+			actionBuffer[id] = nextAction;
 		}
 		boolean actionAll = true;
 		for (MJAction a : actionBuffer) {
@@ -145,6 +157,7 @@ public class GameScene extends PrimaryScene {
 		}
 
 		// state transition
+		MJState prev = mjState;
 		switch (mjState) {
 		case START:
 			mjState = MJState.PLAY;
@@ -159,18 +172,58 @@ public class GameScene extends PrimaryScene {
 			break;
 		case PLAY:
 			if (actionAll) {
-				System.err.println("next!");
+				mjState = MJState.REACTION;
+				MJAction action = actionBuffer[getTurnPlayerID()];
+				int id = action.id;
+				int index = action.haiIndex;
+				assert id == getTurnPlayerID();
+				int tehaiSize = tehai.get(id).size();
+				if (index >= tehaiSize)
+					throw new GameException("Invalid tehai index");
+				sutehai.get(id).add(tehai.get(id).remove(index));
+			}
+			break;
+		case REACTION:
+			if (actionAll) {
+				mjState = MJState.PLAY;
+				turnIndex = (turnIndex + 1) % playerCount;
+				drawHai(getTurnPlayerID());
+				if (!isMyTurn()) {
+					sendAction(new MJAction(MJAction.Action.OK, myID));
+				}
+				// TODO: temp dummy players
+				for (int i = 1; i < playerCount; i++) {
+					sendAction(new MJAction(MJAction.Action.OK, i));
+				}
 			}
 			break;
 		default:
 			assert false;
 		}
+		if (actionAll) {
+			clearActionBuffer();
+		}
+		if (prev != mjState) {
+			Trace.debug("%s -> %s", prev, mjState);
+		}
 
-		// my turn && PLAY
-		if (isMyTurn()) {
-			if (input.isDownFirstAny()) {
-				sendAction(new MJAction(MJAction.Action.DISCARD, myID));
+		// intaractive process
+		switch (mjState) {
+		case PLAY:
+			if (isMyTurn()) {
+				if (input.isDownFirstAny()) {
+					sendAction(new MJAction(MJAction.Action.DISCARD, myID, 1));
+				}
 			}
+			break;
+		case REACTION:
+			if (!isMyTurn()) {
+				if (input.isDownFirstAny()) {
+					sendAction(new MJAction(MJAction.Action.OK, myID));
+				}
+			}
+		default:
+			break;
 		}
 	}
 

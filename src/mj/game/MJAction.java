@@ -12,8 +12,13 @@ public class MJAction implements Serializable {
 	public int haiIndex;
 
 	public MJAction(Action action, int id) {
+		this(action, id, 0);
+	}
+
+	public MJAction(Action action, int id, int haiIndex) {
 		this.action = action;
 		this.id = id;
+		this.haiIndex = haiIndex;
 	}
 
 	public static enum Action {
