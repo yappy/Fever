@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 import mj.algo.Hai;
 
@@ -25,6 +27,7 @@ import mj.algo.Hai;
  */
 public class GameScene extends PrimaryScene {
 
+	/* MJ Game Data */
 	private MersenneTwister rand;
 	private Queue<Integer> yama = new ArrayDeque<>();
 	private List<List<Integer>> tehai = new ArrayList<>();
@@ -34,9 +37,15 @@ public class GameScene extends PrimaryScene {
 	private int myID = 0;
 	// index of myID in turnMap
 	private int myIndex = -1;
-	// global turn count
-	private int turn = 0;
+	// whose turn (turnMap index)
+	private int turnIndex = 0;
 
+	/* Action Stream */
+	private static final int QUEUE_SIZE = 16;
+	private BlockingQueue<MJAction> actionQueue = new ArrayBlockingQueue<>(
+			QUEUE_SIZE, true);
+
+	/* Device */
 	// temp
 	private static InputDevice input = new InputConfiguration(1, new String[] {
 			"", "", "", "", "OK", "Cancel" }).createInputDevice(0);
@@ -46,7 +55,7 @@ public class GameScene extends PrimaryScene {
 
 	// TODO State enum
 	private static enum MJState {
-
+		PLAY, KAN, PON_CHI
 	}
 
 	public GameScene(long randSeed) {
