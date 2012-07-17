@@ -70,7 +70,7 @@ public class GameScene extends PrimaryScene {
 		actionBuffer = new MJAction[playerCount];
 
 		// seat shuffle
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < playerCount; i++) {
 			turnMap.add(i);
 		}
 		Collections.shuffle(turnMap, rand);
@@ -95,7 +95,7 @@ public class GameScene extends PrimaryScene {
 		yama = new ArrayDeque<>(list);
 
 		// haipai
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < playerCount; i++) {
 			List<Integer> hand = new ArrayList<>();
 			for (int t = 0; t < 14; t++) {
 				hand.add(yama.poll());
