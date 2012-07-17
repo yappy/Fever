@@ -25,6 +25,11 @@ public class MJAction implements Serializable {
 		OK, DISCARD, PON, CHI, ANKAN, KAKAN, DAIMINKAN,
 	}
 
+	@Override
+	public String toString() {
+		return action + "(" + id + ")";
+	}
+
 	private static final long serialVersionUID = 3630032894849371616L;
 
 }

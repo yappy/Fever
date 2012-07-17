@@ -147,14 +147,18 @@ public class GameScene extends PrimaryScene {
 			int id = nextAction.id;
 			if (id < 0 || id >= playerCount)
 				throw new GameException("Invalid ID: " + id);
-			if (actionBuffer[id] != null)
+			if (actionBuffer[id] != null) {
+				System.err.println(actionBuffer[id]);
 				throw new GameException("Buffer is not empty: " + id);
+			}
 			actionBuffer[id] = nextAction;
+			Trace.debug(Arrays.toString(actionBuffer));
 		}
 		boolean actionAll = true;
 		for (MJAction a : actionBuffer) {
 			actionAll &= (a != null);
 		}
+		assert !(actionAll && !actionQueue.isEmpty());
 
 		// state transition
 		MJState prevState = mjState;
@@ -168,7 +172,11 @@ public class GameScene extends PrimaryScene {
 			}
 			// TODO: temp dummy players
 			for (int i = 1; i < playerCount; i++) {
-				sendAction(new MJAction(MJAction.Action.OK, i));
+				if (i == getTurnPlayerID()) {
+					sendAction(new MJAction(MJAction.Action.DISCARD, i, 13));
+				} else {
+					sendAction(new MJAction(MJAction.Action.OK, i));
+				}
 			}
 			break;
 		case PLAY:
@@ -176,12 +184,28 @@ public class GameScene extends PrimaryScene {
 				mjState = MJState.REACTION;
 				MJAction action = actionBuffer[getTurnPlayerID()];
 				int id = action.id;
-				int index = action.haiIndex;
 				assert id == getTurnPlayerID();
-				int tehaiSize = tehai.get(id).size();
-				if (index >= tehaiSize)
-					throw new GameException("Invalid tehai index");
-				sutehai.get(id).add(tehai.get(id).remove(index));
+				switch (action.action) {
+				case DISCARD: {
+					int index = action.haiIndex;
+					int tehaiSize = tehai.get(id).size();
+					if (index >= tehaiSize)
+						throw new GameException("Invalid tehai index");
+					sutehai.get(id).add(tehai.get(id).remove(index));
+				}
+					break;
+				default:
+					// TODO: other actions
+					assert false;
+				}
+				Collections.sort(tehai.get(id));
+				if (isMyTurn()) {
+					sendAction(new MJAction(MJAction.Action.DISCARD, myID, 1));
+				}
+				// TODO: temp dummy players
+				for (int i = 1; i < playerCount; i++) {
+					sendAction(new MJAction(MJAction.Action.OK, i));
+				}
 			}
 			break;
 		case REACTION:
@@ -194,7 +218,11 @@ public class GameScene extends PrimaryScene {
 				}
 				// TODO: temp dummy players
 				for (int i = 1; i < playerCount; i++) {
-					sendAction(new MJAction(MJAction.Action.OK, i));
+					if (i == getTurnPlayerID()) {
+						sendAction(new MJAction(MJAction.Action.DISCARD, i, 13));
+					} else {
+						sendAction(new MJAction(MJAction.Action.OK, i));
+					}
 				}
 			}
 			break;
@@ -205,8 +233,8 @@ public class GameScene extends PrimaryScene {
 			clearActionBuffer();
 		}
 		if (prevState != mjState) {
-			Trace.debug("%s(%d) -> %s(%d)", prevState, prevIndex, mjState,
-					turnIndex);
+			Trace.debug("%s(%d) -> %s(%d) myIndex=%d", prevState, prevIndex,
+					mjState, turnIndex, myIndex);
 		}
 
 		// intaractive process
@@ -221,9 +249,10 @@ public class GameScene extends PrimaryScene {
 		case REACTION:
 			if (!isMyTurn()) {
 				if (input.isDownFirstAny()) {
-					sendAction(new MJAction(MJAction.Action.OK, myID));
+					sendAction(new MJAction(MJAction.Action.DISCARD, myID, 1));
 				}
 			}
+			break;
 		default:
 			break;
 		}
@@ -253,20 +282,27 @@ public class GameScene extends PrimaryScene {
 		case 0:
 			for (int i = 0; i < list.size(); i++) {
 				int hai = list.get(i) / 4;
-				g.drawImage(getImage(hai), 0 + HAI_W * i, 500, null);
+				g.drawImage(getImage(hai), 100 + HAI_W * i, 500, null);
 			}
 			break;
+		// toimen
 		case 2:
 			for (int i = 0; i < list.size(); i++) {
-				g.drawImage(getImage(imgHaiBackV), 0 + HAI_W * i, 100, null);
+				g.drawImage(getImage(imgHaiBackV), 100 + HAI_W * i, 100, null);
 			}
 			break;
-		// TODO kamicha, shimocha
+		// simocha
 		case 1:
 			for (int i = 0; i < list.size(); i++) {
-				g.drawImage(getImage(imgHaiBackH), 500, 0 + HAI_W * i, null);
+				g.drawImage(getImage(imgHaiBackH), 500, 50 + HAI_W * i, null);
 			}
+			break;
+		// kamicha
 		case 3:
+			for (int i = 0; i < list.size(); i++) {
+				g.drawImage(getImage(imgHaiBackH), 0, 50 + HAI_W * i, null);
+			}
+			break;
 		}
 	}
 
