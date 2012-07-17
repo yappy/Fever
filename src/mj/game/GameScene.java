@@ -157,7 +157,8 @@ public class GameScene extends PrimaryScene {
 		}
 
 		// state transition
-		MJState prev = mjState;
+		MJState prevState = mjState;
+		int prevIndex = turnIndex;
 		switch (mjState) {
 		case START:
 			mjState = MJState.PLAY;
@@ -203,8 +204,9 @@ public class GameScene extends PrimaryScene {
 		if (actionAll) {
 			clearActionBuffer();
 		}
-		if (prev != mjState) {
-			Trace.debug("%s -> %s", prev, mjState);
+		if (prevState != mjState) {
+			Trace.debug("%s(%d) -> %s(%d)", prevState, prevIndex, mjState,
+					turnIndex);
 		}
 
 		// intaractive process
