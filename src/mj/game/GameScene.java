@@ -291,7 +291,7 @@ public class GameScene extends PrimaryScene {
 				g.drawImage(getImage(imgHaiBackV), 100 + HAI_W * i, 100, null);
 			}
 			break;
-		// simocha
+		// shimocha
 		case 1:
 			for (int i = 0; i < list.size(); i++) {
 				g.drawImage(getImage(imgHaiBackH), 500, 50 + HAI_W * i, null);
